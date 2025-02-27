@@ -3,7 +3,6 @@ import React, { FC, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { MenuItem } from "types/menu";
 import { BottomNavigation, Icon } from "zmp-ui";
-import { CartIcon } from "./cart-icon";
 
 const tabs: Record<string, MenuItem> = {
   "/": {
@@ -13,11 +12,6 @@ const tabs: Record<string, MenuItem> = {
   "/notification": {
     label: "Thông báo",
     icon: <Icon icon="zi-notif" />,
-  },
-  "/cart": {
-    label: "Giỏ hàng",
-    icon: <CartIcon />,
-    activeIcon: <CartIcon active />,
   },
   "/profile": {
     label: "Cá nhân",
