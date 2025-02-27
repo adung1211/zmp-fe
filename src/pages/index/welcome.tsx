@@ -4,20 +4,26 @@ import logo from "static/logo.png";
 import appConfig from "../../../app-config.json";
 import { getConfig } from "utils/config";
 
-export const Welcome: FC = () => {
+export const  Welcome: FC = () => {
   return (
     <Header
-      className="app-header no-border pl-4 flex-none pb-[6px]"
+      className="app-header no-border flex-none pl-4 text-white bg-green" 
       showBackIcon={false}
       title={
         (
           <Box flex alignItems="center" className="space-x-2">
             <img
-              className="w-8 h-8 rounded-lg border-inset"
-              src={getConfig((c) => c.template.headerLogo) || logo}
+              className="w-10 h-10 rounded-full"
+              src={"https://ui-avatars.com/api/?name=GU&background=random&size=56"}
+              alt="User"
             />
-            <Box>
-              <Text.Title size="small">{appConfig.app.title}</Text.Title>
+            <Box className="flex flex-col pl-2">
+            <Text size="normal" className="text-white">
+             Xin chào,
+            </Text> 
+            <Text.Title size="normal" className="text-white">
+             Guest
+            </Text.Title>
             </Box>
           </Box>
         ) as unknown as string
