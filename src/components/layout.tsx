@@ -7,6 +7,7 @@ import ProfilePage from "pages/profile";
 import { getSystemInfo } from "zmp-sdk";
 import { ScrollRestoration } from "./scroll-restoration";
 import { useHandlePayment } from "hooks";
+import NewsDetail from "../pages/newsDetail";
 
 if (import.meta.env.DEV) {
   document.body.style.setProperty("--zaui-safe-area-inset-top", "24px");
@@ -30,6 +31,7 @@ export const Layout: FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
+          <Route path="/news/:id" element={<NewsDetail />} />
         </Routes>
       </Box>
       <Navigation />

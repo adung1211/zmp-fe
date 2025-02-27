@@ -116,3 +116,13 @@ body {
     }
   }
 }
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.scrollable-content::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollable-content {
+  scrollbar-width: none; /* Firefox 67+ */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}

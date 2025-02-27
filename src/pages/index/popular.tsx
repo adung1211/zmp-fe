@@ -1,4 +1,5 @@
 import { Section } from "components/section";
+import { ProductSlideSkeleton } from "components/skeletons";
 import React, { Suspense } from "react";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
@@ -7,26 +8,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Box, Text } from "zmp-ui";
 import { displayDate } from "utils/date";
 import { FaEye } from "react-icons/fa"; 
-import { useNavigate } from "react-router-dom";
 
 const parseDateString = (dateString: string) => {
   const [day, month, year] = dateString.split('-').map(Number);
   return new Date(year, month - 1, day);
 };
 
-export const RecommendContent: FC = () => {
+export const PopularContent: FC = () => {
   const newsItems = useRecoilValue(newsState);
-  const navigate = useNavigate();
 
-  const handleNewsClick = (id: number) => {
-    navigate(`/news/${id}`);
-  };
+  const sortedNewsItems = [...newsItems].sort((a, b) => b.view - a.view);
 
   return (
-    <Section title="Tin tức dành cho bạn" padding="title-only">
+    <Section title="Tin tức nổi bật" padding="title-only">
       <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
-        {newsItems.map((newsItem) => (
-          <SwiperSlide key={newsItem.id} onClick={() => handleNewsClick(newsItem.id)}>
+        {sortedNewsItems.map((newsItem) => (
+          <SwiperSlide key={newsItem.id}>
             <Box className="p-4 bg-white rounded-lg shadow-md">
               <img src={newsItem.image} alt={newsItem.title} className="w-full h-32 object-cover rounded-md" />
               <Text.Title size="small" className="mt-2 line-clamp-2">
@@ -49,10 +46,11 @@ export const RecommendContent: FC = () => {
   );
 };
 
-export const Recommend: FC = () => {
+
+export const Popular: FC = () => {
   return (
     <Suspense>
-      <RecommendContent />
+      <PopularContent />
     </Suspense>
   );
 };
