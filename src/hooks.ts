@@ -4,6 +4,35 @@ import { matchStatusBarColor } from "utils/device";
 import { EventName, events, Payment } from "zmp-sdk";
 import { useNavigate, useSnackbar } from "zmp-ui";
 
+import { useRecoilState } from "recoil";
+import { authAtom } from "./state";
+import { User } from "types/user";
+import { saveSession, getSession, clearSession } from "utils/storage";
+
+export const useAuth = () => {
+  const [user, setUser] = useRecoilState(authAtom);
+
+  useEffect(() => {
+    const savedUser = getSession();
+    if (savedUser) {
+      setUser(savedUser);
+    }
+  }, []);
+
+  const login = async (data) => {
+    const userData = _.pick(data.userInfo, ["id", "name", "avatar"]) as User;
+    setUser(userData);
+    saveSession(userData);
+  };
+
+  const logout = async () => {
+    setUser(null);
+    clearSession();
+  };
+
+  return { user, login, logout };
+};
+
 export function useMatchStatusTextColor(visible?: boolean) {
   const changedRef = useRef(false);
   useEffect(() => {

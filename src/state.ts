@@ -11,6 +11,13 @@ import { calcFinalPrice } from "utils/product";
 import { wait } from "utils/async";
 import categories from "../mock/categories.json";
 
+import { User } from "types/user";
+
+export const authAtom = atom<User | null>({
+  key: "authState",
+  default: null,
+});
+
 export const userState = selector({
   key: "user",
   get: async () => {

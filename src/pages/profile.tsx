@@ -2,24 +2,57 @@ import React, { FC } from "react";
 import { Box, Header, Icon, Page, Text } from "zmp-ui";
 import subscriptionDecor from "static/subscription-decor.svg";
 import { ListRenderer } from "components/list-renderer";
-import { useToBeImplemented } from "hooks";
+import { useToBeImplemented, useAuth } from "hooks";
 import { useRecoilCallback } from "recoil";
 import { userState } from "state";
 
+import { authorize } from "zmp-sdk/apis";
+import { getUserInfo } from "zmp-sdk/apis";
+
+import { useRecoilState } from "recoil";
+import { authAtom } from "state";
+
 const Subscription: FC = () => {
-  const requestUserInfo = useRecoilCallback(
-    ({ snapshot }) =>
-      async () => {
-        const userInfo = await snapshot.getPromise(userState);
-        console.warn("Các bên tích hợp có thể sử dụng userInfo ở đây...", {
-          userInfo,
-        });
-      },
-    []
-  );
+  const {login} = useAuth();
+  // const requestUserInfo = useRecoilCallback(
+  //   ({ snapshot }) =>
+  //     async () => {
+  //       const userInfo = await snapshot.getPromise(userState);
+  //       console.warn("Các bên tích hợp có thể sử dụng userInfo ở đây...", {
+  //         userInfo,
+  //       });
+  //     },
+  //   []
+  // );
+
+  const authorizeUser = async () => {
+    try {
+      const data = await authorize({
+        scopes: ["scope.userInfo", "scope.userPhonenumber"],
+      });
+      
+      try {
+        const userInfo = await getUserInfo({});
+        console.log(userInfo);
+
+        try{
+          login(userInfo);
+        }
+        catch(error){
+          console.log(error);
+        }
+      } catch (error) {
+        // xử lý khi gọi api thất bại
+        console.log("That bai 1");
+      }
+    } catch (error) {
+      // xử lý khi gọi api thất bại
+      console.log("That bai 2");
+    }
+  };
 
   return (
-    <Box className="m-4" onClick={requestUserInfo}>
+    <Box className="m-4" onClick={authorizeUser}>
       <Box
         className="bg-green text-white rounded-xl p-4 space-y-2"
         style={{
@@ -113,11 +146,39 @@ const Other: FC = () => {
   );
 };
 
+const Logged: FC = () => {
+  const [user, setUser] = useRecoilState(authAtom);
+  console.log(user?.name);
+  return (
+    <Box className="m-4">
+      <ListRenderer
+        items={[
+          {
+            left: <Icon icon="zi-user" />,
+            right: (
+              <Box flex>
+                <Text.Header className="flex-1 items-center font-normal">
+                    {user?.name}
+                </Text.Header>
+                <Icon icon="zi-chevron-right" />
+              </Box>
+            ),
+          },
+        ]}
+        renderLeft={(item) => item.left}
+        renderRight={(item) => item.right}
+      />
+    </Box>
+  );
+};
+
 const ProfilePage: FC = () => {
+  const { user } = useAuth();
   return (
     <Page>
       <Header showBackIcon={false} title="&nbsp;" />
-      <Subscription />
+      {!user && <Subscription />}
+      {user && <Logged />}
       <Personal />
       <Other />
     </Page>
