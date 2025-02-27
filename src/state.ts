@@ -10,6 +10,26 @@ import { Store } from "types/delivery";
 import { calcFinalPrice } from "utils/product";
 import { wait } from "utils/async";
 import categories from "../mock/categories.json";
+import news from "../mock/news.json";
+
+
+export interface NewsItem {
+  created_at: string;
+  view: number;
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+}
+
+export const newsState = atom<NewsItem[]>({
+  key: "news",
+  default: news.map((item) => ({
+    ...item,
+    image: item.thumbnail_url,
+  })),
+});
+
 
 export const userState = selector({
   key: "user",
