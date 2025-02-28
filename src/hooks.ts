@@ -11,7 +11,12 @@ import { saveSession, getSession, clearSession } from "utils/storage";
 
 import { getUserInfo, getSetting } from "zmp-sdk/apis";
 
-export const useAuth = () => {
+export const useAuth = (): {
+  user: User | null;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
+  checkLoginOnStart: () => Promise<void>;
+} => {
   const [user, setUser] = useRecoilState(authAtom);
 
   useEffect(() => {

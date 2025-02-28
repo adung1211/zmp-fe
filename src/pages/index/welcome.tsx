@@ -4,11 +4,10 @@ import logo from "static/logo.png";
 import appConfig from "../../../app-config.json";
 import { getConfig } from "utils/config";
 
-import { useRecoilState } from "recoil";
-import { authAtom } from "state";
+import { useAuth } from "hooks";
 
 export const  Welcome: FC = () => {
-  const [user, setUser] = useRecoilState(authAtom);
+  const {user} = useAuth();
   return (
     <Header
       className="app-header no-border flex-none pl-4 text-white bg-green" 

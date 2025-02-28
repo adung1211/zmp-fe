@@ -138,7 +138,7 @@ const Other: FC = () => {
 };
 
 const Logged: FC = () => {
-  const [user, setUser] = useRecoilState(authAtom);
+  const {user} = useAuth();
   return (
     <Box className="m-4">
       <ListRenderer
@@ -163,7 +163,7 @@ const Logged: FC = () => {
 };
 
 const ProfilePage: FC = () => {
-  const [user, setUser] = useRecoilState(authAtom);
+  const {user} = useAuth();
   return (
     <Page>
       <Header showBackIcon={false} title="&nbsp;" />
