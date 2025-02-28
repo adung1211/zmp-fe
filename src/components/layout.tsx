@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Route, Routes } from "react-router";
 import { Box } from "zmp-ui";
 import { Navigation } from "./navigation";
@@ -8,6 +8,8 @@ import { getSystemInfo } from "zmp-sdk";
 import { ScrollRestoration } from "./scroll-restoration";
 import { useHandlePayment } from "hooks";
 import NewsDetail from "../pages/newsDetail";
+
+import { useAuth } from "hooks";
 
 if (import.meta.env.DEV) {
   document.body.style.setProperty("--zaui-safe-area-inset-top", "24px");
@@ -22,6 +24,11 @@ if (import.meta.env.DEV) {
 }
 
 export const Layout: FC = () => {
+  const { checkLoginOnStart } = useAuth();
+  
+  useEffect(() => {
+    checkLoginOnStart();
+  }, []);
   useHandlePayment();
 
   return (

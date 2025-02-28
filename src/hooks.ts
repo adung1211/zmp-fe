@@ -9,6 +9,8 @@ import { authAtom } from "./state";
 import { User } from "types/user";
 import { saveSession, getSession, clearSession } from "utils/storage";
 
+import { getUserInfo, getSetting } from "zmp-sdk/apis";
+
 export const useAuth = () => {
   const [user, setUser] = useRecoilState(authAtom);
 
@@ -19,10 +21,37 @@ export const useAuth = () => {
     }
   }, []);
 
-  const login = async (data) => {
-    const userData = _.pick(data.userInfo, ["id", "name", "avatar"]) as User;
-    setUser(userData);
-    saveSession(userData);
+  const checkLoginOnStart = async () => {
+    try {
+      login();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const login = async () => {
+    try {
+      const settings = await getSetting({});
+
+      if (settings.authSetting?.["scope.userInfo"] == true) {
+        try {
+          const data = await getUserInfo({});
+          const userData = _.pick(data.userInfo, [
+            "id",
+            "name",
+            "avatar",
+          ]) as User;
+          setUser(userData);
+          saveSession(userData);
+        } catch (error) {
+          console.log("getUserInfo Error:", error);
+        }
+      } else {
+        logout();
+      }
+    } catch (error) {
+      console.log("getSetting Error:", error);
+    }
   };
 
   const logout = async () => {
@@ -30,7 +59,7 @@ export const useAuth = () => {
     clearSession();
   };
 
-  return { user, login, logout };
+  return { user, login, logout, checkLoginOnStart };
 };
 
 export function useMatchStatusTextColor(visible?: boolean) {

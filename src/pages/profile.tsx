@@ -30,24 +30,15 @@ const Subscription: FC = () => {
       const data = await authorize({
         scopes: ["scope.userInfo", "scope.userPhonenumber"],
       });
-      
-      try {
-        const userInfo = await getUserInfo({});
-        console.log(userInfo);
-
-        try{
-          login(userInfo);
-        }
-        catch(error){
-          console.log(error);
-        }
-      } catch (error) {
-        // xử lý khi gọi api thất bại
-        console.log("That bai 1");
+      try{
+        login();
+      }
+      catch(error){
+        console.log(error);
       }
     } catch (error) {
       // xử lý khi gọi api thất bại
-      console.log("That bai 2");
+      console.log("authorize error:", error);
     }
   };
 
@@ -148,7 +139,6 @@ const Other: FC = () => {
 
 const Logged: FC = () => {
   const [user, setUser] = useRecoilState(authAtom);
-  console.log(user?.name);
   return (
     <Box className="m-4">
       <ListRenderer
