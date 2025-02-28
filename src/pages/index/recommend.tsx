@@ -24,7 +24,7 @@ export const RecommendContent: FC = () => {
 
   return (
     <Section title="Tin tức dành cho bạn" padding="title-only">
-      <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
+      <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4 py-1">
         {newsItems.map((newsItem) => (
           <SwiperSlide key={newsItem.id} onClick={() => handleNewsClick(newsItem.id)}>
             <Box className="p-4 bg-white rounded-lg shadow-md">

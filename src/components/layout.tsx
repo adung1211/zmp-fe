@@ -9,6 +9,7 @@ import { ScrollRestoration } from "./scroll-restoration";
 import { useHandlePayment } from "hooks";
 import NewsDetail from "../pages/newsDetail";
 import NewsPage from "../pages/info/NewsPage";
+import ServicePage from "../pages/service/ServicePage";
 
 import { useAuth } from "hooks";
 
@@ -38,9 +39,10 @@ export const Layout: FC = () => {
       <Box className="flex-1 flex flex-col overflow-hidden">
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
-          <Route path="/profile" element={<ProfilePage />}></Route>
+          <Route path="/profile" element={<ProfilePage />}/>
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/info" element={<NewsPage />} />
+          <Route path='/service' element={<ServicePage />} />
         </Routes>
       </Box>
       <Navigation />

@@ -144,3 +144,17 @@ body {
   }
 }
 
+.custom-bottom-nav {
+  .zaui-bottom-navigation-item-active {
+    color: green; /* Set the active item color to green */
+  }
+  .zaui-bottom-navigation-item {
+    padding-top: 3px; /* Adjust the padding as needed */
+  }
+  .bottom-nav-icon {
+    font-size: 23px; /* Adjust the size as needed */
+  }
+  .bottom-nav-label {
+    font-weight: 500; /* Set the font weight to semi-bold */
+  }
+}

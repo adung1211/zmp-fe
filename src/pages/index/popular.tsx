@@ -21,7 +21,7 @@ export const PopularContent: FC = () => {
 
   return (
     <Section title="Tin tức nổi bật" padding="title-only">
-      <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
+      <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4 py-1">
         {sortedNewsItems.map((newsItem) => (
           <SwiperSlide key={newsItem.id}>
             <Box className="p-4 bg-white rounded-lg shadow-md">
