@@ -14,13 +14,13 @@ const HomePage: React.FunctionComponent = () => {
       <Box className="overflow-x-hidden mt-[-1px] scrollable-content">
         <div className="bg-green mx-[-20px] pt-12 rounded-b-full"></div>
 
-      <QuickAcess /> 
-      <Divider size={20} /> 
-      <Recommend/>
-      <Divider />
-      <Latest/>
-      <Divider />
-      <Popular/>
+        <QuickAcess /> 
+        <Divider size={20} /> 
+        <Recommend/>
+        <Divider />
+        <Latest/>
+        <Divider />
+        <Popular/>
       </Box>
     </Page>
   );

@@ -8,6 +8,7 @@ import { getSystemInfo } from "zmp-sdk";
 import { ScrollRestoration } from "./scroll-restoration";
 import { useHandlePayment } from "hooks";
 import NewsDetail from "../pages/newsDetail";
+import NewsPage from "../pages/info/NewsPage";
 
 import { useAuth } from "hooks";
 
@@ -39,6 +40,7 @@ export const Layout: FC = () => {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path="/info" element={<NewsPage />} />
         </Routes>
       </Box>
       <Navigation />

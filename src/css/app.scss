@@ -126,3 +126,21 @@ body {
   scrollbar-width: none; /* Firefox 67+ */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
+
+// .html-content {
+//   img {
+//     max-height: 300px;
+//     object-fit: contain;
+//     object-position: top;
+//     display: block;
+//     margin: 5px 0 5px 0;
+//   }
+// }
+
+.html-content {
+  p {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+}
+
