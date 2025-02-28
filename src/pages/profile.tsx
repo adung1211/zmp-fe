@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, Header, Icon, Page, Text } from "zmp-ui";
+import { Box, Header, Icon, Page, Text, Button } from "zmp-ui";
 import subscriptionDecor from "static/subscription-decor.svg";
 import { ListRenderer } from "components/list-renderer";
 import { useToBeImplemented, useAuth } from "hooks";
@@ -12,8 +12,15 @@ import { getUserInfo } from "zmp-sdk/apis";
 import { useRecoilState } from "recoil";
 import { authAtom } from "state";
 
+import logoOA from "static/logoOA.png";
+import qr from "static/qr.png";
+import logo from "static/logo.png";
+import { RiLoginCircleFill } from "react-icons/ri";
+
+import { Welcome } from "./index/welcome";
+
 const Subscription: FC = () => {
-  const {login} = useAuth();
+  const { login } = useAuth();
   // const requestUserInfo = useRecoilCallback(
   //   ({ snapshot }) =>
   //     async () => {
@@ -30,10 +37,9 @@ const Subscription: FC = () => {
       const data = await authorize({
         scopes: ["scope.userInfo", "scope.userPhonenumber"],
       });
-      try{
+      try {
         login();
-      }
-      catch(error){
+      } catch (error) {
         console.log(error);
       }
     } catch (error) {
@@ -43,17 +49,37 @@ const Subscription: FC = () => {
   };
 
   return (
+    // <Box className="m-4" onClick={authorizeUser}>
+    //   <Box
+    //     className="bg-green text-white rounded-xl p-4 space-y-2"
+    //     style={{
+    //       backgroundImage: `url(${subscriptionDecor})`,
+    //       backgroundPosition: "right 8px center",
+    //       backgroundRepeat: "no-repeat",
+    //     }}
+    //   >
+    //     <Text.Title className="font-bold">Đăng ký thành viên</Text.Title>
+    //     <Text size="xxSmall">Tích điểm đổi thưởng, mở rộng tiện ích</Text>
+    //   </Box>
+    // </Box>
     <Box className="m-4" onClick={authorizeUser}>
       <Box
-        className="bg-green text-white rounded-xl p-4 space-y-2"
+        className="bg-emerald-600 text-white rounded-xl p-4 space-y-2"
         style={{
-          backgroundImage: `url(${subscriptionDecor})`,
+          // backgroundImage: `url(${subscriptionDecor})`,
           backgroundPosition: "right 8px center",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <Text.Title className="font-bold">Đăng ký thành viên</Text.Title>
-        <Text size="xxSmall">Tích điểm đổi thưởng, mở rộng tiện ích</Text>
+        <Box flex>
+          <Box>
+            <Text.Title className="flex-1 items-center font-semibold">
+              Đăng ký thành viên
+            </Text.Title>
+            <Text size="xxSmall">Tích điểm đổi thưởng, mở rộng tiện ích</Text>
+          </Box>
+          <RiLoginCircleFill className="text-4xl ml-auto" />
+        </Box>
       </Box>
     </Box>
   );
@@ -65,7 +91,6 @@ const Personal: FC = () => {
   return (
     <Box className="m-4">
       <ListRenderer
-        title="Cá nhân"
         onClick={onClick}
         items={[
           {
@@ -73,7 +98,7 @@ const Personal: FC = () => {
             right: (
               <Box flex>
                 <Text.Header className="flex-1 items-center font-normal">
-                  Thông tin tài khoản
+                  Chỉnh sửa thông tin
                 </Text.Header>
                 <Icon icon="zi-chevron-right" />
               </Box>
@@ -84,7 +109,7 @@ const Personal: FC = () => {
             right: (
               <Box flex>
                 <Text.Header className="flex-1 items-center font-normal">
-                  Lịch sử đơn hàng
+                  Khác
                 </Text.Header>
                 <Icon icon="zi-chevron-right" />
               </Box>
@@ -104,28 +129,28 @@ const Other: FC = () => {
   return (
     <Box className="m-4">
       <ListRenderer
-        title="Khác"
         onClick={onClick}
         items={[
           {
             left: <Icon icon="zi-star" />,
             right: (
               <Box flex>
-                <Text.Header className="flex-1 items-center font-normal">
-                  Đánh giá đơn hàng
-                </Text.Header>
-                <Icon icon="zi-chevron-right" />
+                <Text className="flex-1 items-center text-sm">
+                  Quan tâm OA để nhận các thông báo mới
+                </Text>
               </Box>
             ),
           },
           {
-            left: <Icon icon="zi-call" />,
+            left: <img src={logoOA} className="h-7 w-7 mt-1" />,
             right: (
               <Box flex>
-                <Text.Header className="flex-1 items-center font-normal">
-                  Liên hệ và góp ý
-                </Text.Header>
-                <Icon icon="zi-chevron-right" />
+                <Text className="flex-1 items-center font-semibold mt-1">
+                  An Tâm Tưới Mini App
+                </Text>
+                <Button variant="primary" size="small">
+                  Quan tâm
+                </Button>
               </Box>
             ),
           },
@@ -137,40 +162,34 @@ const Other: FC = () => {
   );
 };
 
-const Logged: FC = () => {
-  const {user} = useAuth();
+const QRCode: FC = () => {
   return (
-    <Box className="m-4">
-      <ListRenderer
-        items={[
-          {
-            left: <Icon icon="zi-user" />,
-            right: (
-              <Box flex>
-                <Text.Header className="flex-1 items-center font-normal">
-                    {user?.name}
-                </Text.Header>
-                <Icon icon="zi-chevron-right" />
-              </Box>
-            ),
-          },
-        ]}
-        renderLeft={(item) => item.left}
-        renderRight={(item) => item.right}
-      />
+    <Box className= "m-4">
+      <Box className="bg-white text-center rounded-xl p-4 space-y-2">
+        <Text className="text-xs font-light">Chia sẻ mã QR này để giới thiệu ứng dụng tới bạn bè</Text>
+        <img src={logo} className="h-12 mx-auto mag" />
+        <Text.Title className="font-bold text-base">An Tâm Tưới Mini App</Text.Title>
+        <img src={qr} className="h-24 mx-auto mag" />
+
+        <Box className="flex justify-center space-x-20 pt-4">
+          <Button className="text-xs" variant="secondary" size="medium">Lưu ảnh<Icon icon="zi-download" className="ml-2"/></Button>
+          <Button className="text-xs" variant="secondary" size="medium">Chia sẻ<Icon icon="zi-share-external-2" className="ml-2"/></Button>
+      </Box>
+      </Box>
     </Box>
   );
 };
 
 const ProfilePage: FC = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   return (
     <Page>
-      <Header showBackIcon={false} title="&nbsp;" />
+      {user && <Welcome />}
+      {!user && <Header showBackIcon={false} title="&nbsp;" />}
       {!user && <Subscription />}
-      {user && <Logged />}
       <Personal />
       <Other />
+      <QRCode/>
     </Page>
   );
 };
