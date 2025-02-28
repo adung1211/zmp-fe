@@ -5,7 +5,6 @@ import { newsState } from "state";
 import { Box, Text } from "zmp-ui";
 import { displayDate } from "utils/date";
 import { Header, Page } from "zmp-ui";
-import ReactHtmlParser from "react-html-parser";
 
 const parseDateString = (dateString: string) => {
   const [day, month, year] = dateString.split('-').map(Number);
@@ -33,7 +32,7 @@ const NewsDetail: FC = () => {
         <Text className="mt-2 text-slate-500">
           {displayDate(parseDateString(newsItem.created_at))}
         </Text>
-        <div className="mt-4 html-content">{ReactHtmlParser(newsItem.content)}</div>
+        <div className="mt-4 html-content" dangerouslySetInnerHTML={{ __html: newsItem.content }} />
       </Box>
     </Page>
   );
