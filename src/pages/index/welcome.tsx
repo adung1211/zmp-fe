@@ -4,7 +4,11 @@ import logo from "static/logo.png";
 import appConfig from "../../../app-config.json";
 import { getConfig } from "utils/config";
 
+import { useRecoilState } from "recoil";
+import { authAtom } from "state";
+
 export const  Welcome: FC = () => {
+  const [user, setUser] = useRecoilState(authAtom);
   return (
     <Header
       className="app-header no-border flex-none pl-4 text-white bg-green" 
@@ -14,7 +18,7 @@ export const  Welcome: FC = () => {
           <Box flex alignItems="center" className="space-x-2">
             <img
               className="w-10 h-10 rounded-full"
-              src={"https://ui-avatars.com/api/?name=GU&background=random&size=56"}
+              src={user?.avatar || "https://ui-avatars.com/api/?name=GU&background=random&size=56"}
               alt="User"
             />
             <Box className="flex flex-col pl-2">
@@ -22,7 +26,7 @@ export const  Welcome: FC = () => {
              Xin chào,
             </Text> 
             <Text.Title size="normal" className="text-white">
-             Guest
+             {user?.name || "Guest"}
             </Text.Title>
             </Box>
           </Box>

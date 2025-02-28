@@ -163,7 +163,7 @@ const Logged: FC = () => {
 };
 
 const ProfilePage: FC = () => {
-  const { user } = useAuth();
+  const [user, setUser] = useRecoilState(authAtom);
   return (
     <Page>
       <Header showBackIcon={false} title="&nbsp;" />

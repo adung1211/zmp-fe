@@ -12,7 +12,6 @@ import { wait } from "utils/async";
 import categories from "../mock/categories.json";
 import news from "../mock/news.json";
 
-
 export interface NewsItem {
   created_at: string;
   view: number;
@@ -29,7 +28,6 @@ export const newsState = atom<NewsItem[]>({
     image: item.thumbnail_url,
   })),
 });
-
 
 import { User } from "types/user";
 
