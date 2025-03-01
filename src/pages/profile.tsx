@@ -7,13 +7,13 @@ import { useRecoilCallback } from "recoil";
 import { userState } from "state";
 
 import { authorize } from "zmp-sdk/apis";
-import { getUserInfo } from "zmp-sdk/apis";
+import { getUserInfo, saveImageToGallery, openShareSheet } from "zmp-sdk/apis";
 
 import { useRecoilState } from "recoil";
 import { authAtom } from "state";
 
 import logoOA from "static/logoOA.png";
-import qr from "static/qr.png";
+import qr from "static/qr.jpg";
 import logo from "static/logo.png";
 import { RiLoginCircleFill } from "react-icons/ri";
 
@@ -163,6 +163,30 @@ const Other: FC = () => {
 };
 
 const QRCode: FC = () => {
+  const handleSaveImage = async () => {
+    try {
+      await saveImageToGallery({
+        imageUrl: "https://i.imgur.com/2zEzJ40.png",
+        onProgress: (progress) => {
+          console.log(progress);
+        },
+      });
+    } catch (error) {
+      // xử lý khi gọi api thất bại
+      console.log(error);
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      const data = await openShareSheet({
+        type: "image",
+        data: {
+          imageUrls: ["https://i.imgur.com/2zEzJ40.png"],
+        },
+      });
+    } catch (err) {}
+  };
   return (
     <Box className= "m-4">
       <Box className="bg-white text-center rounded-xl p-4 space-y-2">
@@ -172,8 +196,8 @@ const QRCode: FC = () => {
         <img src={qr} className="h-24 mx-auto mag" />
 
         <Box className="flex justify-center space-x-20 pt-4">
-          <Button className="text-xs" variant="secondary" size="medium">Lưu ảnh<Icon icon="zi-download" className="ml-2"/></Button>
-          <Button className="text-xs" variant="secondary" size="medium">Chia sẻ<Icon icon="zi-share-external-2" className="ml-2"/></Button>
+          <Button className="text-xs" variant="secondary" size="medium" onClick={handleSaveImage}>Lưu ảnh<Icon icon="zi-download" className="ml-2"/></Button>
+          <Button className="text-xs" variant="secondary" size="medium" onClick={handleShare}>Chia sẻ<Icon icon="zi-share-external-2" className="ml-2"/></Button>
       </Box>
       </Box>
     </Box>
