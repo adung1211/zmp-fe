@@ -51,15 +51,15 @@ const LatestNews: FC = () => {
                   </Text>
                 </Box>
                 <Box className="flex items-center text-zinc-500">
-                  <Box className="flex items-center mr-3 text-blue-500">
+                  <Box className="flex items-center mr-3 text-blue-400">
                     <FaComment className="mr-1" />
                     <Text size="xSmall">{commentCount}</Text>
                   </Box>
-                  <Box className="flex items-center mr-3 text-red-500">
+                  <Box className="flex items-center mr-3 text-red-400">
                     <FaHeart className="mr-1" />
                     <Text size="xSmall">{likeCount}</Text>
                   </Box>
-                  <Box className="flex items-center text-green-500">
+                  <Box className="flex items-center text-slate-500">
                     <FaEye className="mr-1" />
                     <Text size="xSmall">{viewCount}</Text>
                   </Box>
@@ -94,15 +94,15 @@ const LatestNews: FC = () => {
                     </Text>
                   </Box>
                   <Box className="flex items-center text-zinc-500">
-                    <Box className="flex items-center mr-2 text-blue-500">
+                    <Box className="flex items-center mr-2 text-blue-400">
                       <FaComment className="mr-1" />
                       <Text size="xSmall">{commentCount}</Text>
                     </Box>
-                    <Box className="flex items-center mr-2 text-red-500">
+                    <Box className="flex items-center mr-2 text-red-400">
                       <FaHeart className="mr-1" />
                       <Text size="xSmall">{likeCount}</Text>
                     </Box>
-                    <Box className="flex items-center text-green-500">
+                    <Box className="flex items-center text-slate-500">
                       <FaEye className="mr-1" />
                       <Text size="xSmall">{viewCount}</Text>
                     </Box>

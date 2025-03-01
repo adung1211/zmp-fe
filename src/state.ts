@@ -19,6 +19,15 @@ export interface NewsItem {
   title: string;
   content: string;
   image: string;
+  tags: {
+    id: number;
+    name: string;
+    slug: string;
+    pivot: {
+      post_id: number;
+      post_tag_id: number;
+    };
+  }[];
 }
 
 export const newsState = atom<NewsItem[]>({
@@ -26,6 +35,7 @@ export const newsState = atom<NewsItem[]>({
   default: news.map((item) => ({
     ...item,
     image: item.thumbnail_url,
+    tags: item.tags,
   })),
 });
 

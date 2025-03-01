@@ -12,8 +12,8 @@ const NewsTabs: FC = () => {
   return (
     <Box className="bg-white shadow-md">
       <Tabs activeKey={tab} onChange={handleTabChange} className="px-4">
-        <Tabs.Tab key="latest" label={<Text>Tin mới nhất</Text>}/>
-        <Tabs.Tab key="featured" label={<Text>Tin nổi bật</Text>}/>
+        <Tabs.Tab key="latest" label={<Text className=" font-semibold">Mới nhất</Text>}/>
+        <Tabs.Tab key="featured" label={<Text className=" font-semibold">Nổi bật</Text>}/>
       </Tabs>
     </Box>
   );

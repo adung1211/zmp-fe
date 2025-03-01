@@ -6,7 +6,7 @@ import { newsState } from "state";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Box, Text } from "zmp-ui";
 import { displayDate } from "utils/date";
-import { FaEye } from "react-icons/fa"; 
+import { FaEye, FaCalendarAlt } from "react-icons/fa"; 
 import { useNavigate } from "react-router-dom";
 
 const parseDateString = (dateString: string) => {
@@ -33,10 +33,13 @@ export const RecommendContent: FC = () => {
                 {newsItem.title}
               </Text.Title>
               <Box className="flex justify-between items-center mt-2 text-gray-500">
-                <Text className=" text-s text-slate-500">
-                  {displayDate(parseDateString(newsItem.created_at))}
-                </Text>
                 <Box className="flex items-center">
+                  <FaCalendarAlt className="mr-1 text-zinc-500" />
+                  <Text size="xSmall" className="text-zinc-500">
+                    {displayDate(parseDateString(newsItem.created_at))}
+                  </Text>
+                </Box>
+                <Box className="flex items-center text-slate-500">
                   <FaEye className="mr-2" />
                   <Text size="small">{newsItem.view} views</Text>
                 </Box>
