@@ -127,40 +127,45 @@ const NewsDetail: FC = () => {
           className="mt-4 html-content px-2"
           dangerouslySetInnerHTML={{ __html: newsItem.content }}
         />
-        <Divider />
+        <Box className="mb-2 px-3 text-right font-bold">
+          {newsItem.created_by}
+        </Box>
 
-        <Box className="p-2">
+        <Box className="">
           <Text.Title
-          className="mb-2"
-          >Comments</Text.Title>
+          className="p-2"
+          >Bình luận</Text.Title>
+          <Box className="bg-slate-100 max-h-64 overflow-y-auto scrollable-content py-1">
           {comments.map((comment) => (
-            <Box key={comment.id} className="mb-2 p-2 bg-slate-100 rounded-md flex items-start">
+            <Box key={comment.id} className="mb-1 px-2 py-4 flex items-start shadow-sm bg-white">
               <img
                 src={`https://ui-avatars.com/api/?name=${comment.author}&background=random&size=32`}
                 alt="User Avatar"
                 className="w-8 h-8 rounded-full mr-2 mt-1"
               />
               <Box>
-                <Text size="small" className="font-semibold">
+                <Text size="small" className="font-bold">
                   {comment.author}
                 </Text>
-                <Text>{comment.text}</Text>
+                <Text
+                  size="xSmall"
+                >{comment.text}</Text>
               </Box>
             </Box>
           ))}
+          </Box>
         </Box>
-        <Divider />
-        <Box className="mt-4 px-2 flex items-center m-2">
+        <Box className="mt-2 px-2 flex items-center m-2">
           <img
             src={avatarUrl}
             alt="User Avatar"
-            className="w-8 h-8 rounded-full mr-2"
+            className="w-10 h-10 rounded-full mr-2"
           />
           <Box className="border border-slate-300
-           rounded-lg flex-1 flex items-center">
+           rounded-full flex-1 flex items-center px-4">
             <Input
               type="text"
-              placeholder="Add a comment..."
+              placeholder="Viết bình luận..."
               value={newComment}
               className="border-none flex-1"
               onChange={(e) => setNewComment(e.target.value)}
@@ -174,7 +179,7 @@ const NewsDetail: FC = () => {
               className="cursor-pointer text-slate-500"
               onClick={handleCommentSubmit}
             >
-              <FaPaperPlane className="text-xl mr-3" />
+              <FaPaperPlane className="text-xl mr-2" />
             </Box>
           </Box>
         </Box>

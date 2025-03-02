@@ -28,6 +28,7 @@ export interface NewsItem {
       post_tag_id: number;
     };
   }[];
+  created_by: string;
 }
 
 export const newsState = atom<NewsItem[]>({
@@ -36,6 +37,7 @@ export const newsState = atom<NewsItem[]>({
     ...item,
     image: item.thumbnail_url,
     tags: item.tags,
+    created_by: item.created_by,
   })),
 });
 
