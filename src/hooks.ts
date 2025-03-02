@@ -11,6 +11,8 @@ import { saveSession, getSession, clearSession } from "utils/storage";
 
 import { getUserInfo, getSetting } from "zmp-sdk/apis";
 
+import { createUser, isUserExist } from "api/user";
+
 export const useAuth = (): {
   user: User | null;
   login: () => Promise<void>;
@@ -48,6 +50,11 @@ export const useAuth = (): {
           ]) as User;
           setUser(userData);
           saveSession(userData);
+
+          // const isExist = await isUserExist(userData.id);
+          // if (!isExist) {
+          //   await createUser(userData.id, userData.name, userData.avatar);
+          // }
         } catch (error) {
           console.log("getUserInfo Error:", error);
         }
