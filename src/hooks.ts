@@ -51,10 +51,15 @@ export const useAuth = (): {
           setUser(userData);
           saveSession(userData);
 
-          // const isExist = await isUserExist(userData.id);
-          // if (!isExist) {
-          //   await createUser(userData.id, userData.name, userData.avatar);
-          // }
+          try {
+            const isExist = await isUserExist(userData.id);
+            if (!isExist) {
+              console.log("not exist");
+              await createUser(userData.id, userData.name, userData.avatar);
+            }
+          } catch (error) {
+            console.log("createUser Error:", error);
+          }
         } catch (error) {
           console.log("getUserInfo Error:", error);
         }

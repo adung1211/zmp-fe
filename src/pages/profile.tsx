@@ -19,6 +19,8 @@ import { RiLoginCircleFill } from "react-icons/ri";
 
 import { Welcome } from "./index/welcome";
 
+import { createUser, isUserExist } from "api/user";
+
 const Subscription: FC = () => {
   const { login } = useAuth();
   // const requestUserInfo = useRecoilCallback(
@@ -46,6 +48,8 @@ const Subscription: FC = () => {
       // xử lý khi gọi api thất bại
       console.log("authorize error:", error);
     }
+    // console.log(await isUserExist("1211"));
+    // console.log(await createUser("123", "name", "avatar"));
   };
 
   return (

@@ -1,30 +1,29 @@
-const API_URL = import.meta.env.REACT_APP_API_URL; // Load API URL from environment variables
+const API_URL = import.meta.env.VITE_API_URL;
+
+import axios from "axios";
 
 export const isUserExist = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/user/checkExist/${id}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
+    const { data } = await axios.get(`${API_URL}/user/checkExist/${id}`, {
+      headers: { "ngrok-skip-browser-warning": "69420" },
+    });
+
+    return !!data;
   } catch (error) {
+    console.error("Error in isUserExist:", error);
     throw error;
   }
 };
 
 export const createUser = async (id, name, avatar) => {
   try {
-    const response = await fetch(`${API_URL}/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id, name, avatar }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+    await axios.post(
+      `${API_URL}/user/create`,
+      { id, name, avatar },
+      {
+        headers: { "ngrok-skip-browser-warning": "69420" },
+      }
+    );
   } catch (error) {
     throw error;
   }
