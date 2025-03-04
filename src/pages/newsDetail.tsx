@@ -8,6 +8,8 @@ import { Header, Page } from "zmp-ui";
 import { FaHeart, FaComment, FaCalendarAlt, FaPaperPlane } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { Divider } from "components/divider";
+import { useAuth } from "hooks";
+import useNewsDetail from "hooks/useNewsDetail";
 
 const parseDateString = (dateString: string) => {
   const [day, month, year] = dateString.split('-').map(Number);
@@ -17,42 +19,49 @@ const parseDateString = (dateString: string) => {
 const NewsDetail: FC = () => {
   const { id } = useParams<{ id: string }>();
   const newsItems = useRecoilValue(newsState);
-  const newsItem = newsItems.find((item) => item.id === parseInt(id ?? "0"));
 
-  const [isLiked, setIsLiked] = useState(false);
-  const [comments, setComments] = useState([
-    { id: 1, author: "User1", text: "This is a great article!" },
-    { id: 2, author: "User2", text: "Thanks for sharing." },
-  ]);
+  // Call useAuth unconditionally
+  const { user } = useAuth();
+
+  const {
+    newsItem,
+    isLiked,
+    likeCount,
+    comments,
+    loading,
+    error,
+    handleLikeClick,
+    handleCommentSubmit,
+  } = useNewsDetail({ newsItemId: id });
 
   const commentCount = Math.floor(Math.random() * 100);
-  const likeCount = Math.floor(Math.random() * 500);
   const viewCount = newsItem ? newsItem.view : 0;
 
   const [newComment, setNewComment] = useState("");
-  const currentUser = "CurrentUser"; // Replace with actual user
+  const currentUser = user?.name || "Guest";
 
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
-  };
-
-  const handleCommentSubmit = () => {
+  const onCommentSubmit = () => {
     if (newComment.trim() !== "") {
-      const newCommentObj = {
-        id: comments.length + 1,
-        author: currentUser,
-        text: newComment,
-      };
-      setComments([...comments, newCommentObj]);
+      handleCommentSubmit(newComment);
       setNewComment("");
     }
   };
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (error) {
+    return <Text color="red">{error}</Text>;
+  }
 
   if (!newsItem) {
     return <Text>News not found</Text>;
   }
 
-  const avatarUrl = `https://ui-avatars.com/api/?name=${currentUser}&background=random&size=32`;
+  const avatarUrl =
+    user?.avatar ||
+    "https://ui-avatars.com/api/?name=GU&background=random&size=56";
 
   return (
     <Page className="relative flex-1 flex flex-col bg-white">
@@ -63,7 +72,7 @@ const NewsDetail: FC = () => {
       <Box className="overflow-y-auto scrollable-content">
         <Box className="pb-4">
           <img
-            src={newsItem.image}
+            src={newsItem.thumbnail_url}
             alt={newsItem.title}
             className="w-full h-64 object-cover"
           />
@@ -71,14 +80,16 @@ const NewsDetail: FC = () => {
             {newsItem.title}
           </Text.Title>
           <Box className="flex flex-wrap mt-3 px-3">
-            {newsItem.tags.map((tag) => (
-              <Box
-                key={tag.id}
-                className="bg-slate-200 text-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
-              >
-                {tag.name}
-              </Box>
-            ))}
+            {newsItem.tags && Array.isArray(newsItem.tags) ? (
+              newsItem.tags.map((tag) => (
+                <Box
+                  key={tag.id}
+                  className="bg-slate-200 text-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
+                >
+                  {tag.name}
+                </Box>
+              ))
+            ) : null}
           </Box>
           <Box className="flex items-center justify-between mt-2 px-3 ">
             <Box>
@@ -112,10 +123,10 @@ const NewsDetail: FC = () => {
             <Box
               className={`w-12 h-12 mr-2 rounded-full flex items-center justify-center cursor-pointer border  bg-slate-100
                 ${
-                isLiked ? "text-red-500 border-red-400 bg-red-100"
-                :
-                " border-slate-300 text-slate-300 bg-slate-100"
-              }`}
+                  isLiked
+                    ? "text-red-500 border-red-400 bg-red-100"
+                    : " border-slate-300 text-slate-300 bg-slate-100"
+                }`}
               onClick={handleLikeClick}
             >
               <FaHeart className="text-xl" />
@@ -132,27 +143,38 @@ const NewsDetail: FC = () => {
         </Box>
 
         <Box className="">
-          <Text.Title
-          className="p-2"
-          >Bình luận</Text.Title>
+          <Text.Title className="p-2">Bình luận</Text.Title>
           <Box className="bg-slate-100 max-h-64 overflow-y-auto scrollable-content py-1">
-          {comments.map((comment) => (
-            <Box key={comment.id} className="mb-1 px-2 py-4 flex items-start shadow-sm bg-white">
-              <img
-                src={`https://ui-avatars.com/api/?name=${comment.author}&background=random&size=32`}
-                alt="User Avatar"
-                className="w-8 h-8 rounded-full mr-2 mt-1"
-              />
-              <Box>
-                <Text size="small" className="font-bold">
-                  {comment.author}
-                </Text>
-                <Text
-                  size="xSmall"
-                >{comment.text}</Text>
+            {comments.map((comment) => (
+              <Box
+                key={comment._id}
+                className="mb-1 px-2 py-2 flex items-start shadow-sm bg-white"
+              >
+                <img
+                  src={comment.userAvatar}
+                  alt="User Avatar"
+                  className="w-8 h-8 rounded-full mr-2 mt-1"
+                />
+                <Box>
+                  <Box className="">
+                    <Text size="small" className="font-bold">
+                      {comment.userName}
+                    </Text>
+                    <Box className="flex items-center">
+                      <Text
+                        size="xxxSmall"
+                        className="text-zinc-500 font-medium"
+                      >
+                        {displayDate(parseDateString(newsItem.created_at))}
+                      </Text>
+                    </Box>
+                  </Box>
+                  <Text size="small" className="mt-[2px]">
+                    {comment.content}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
           </Box>
         </Box>
         <Box className="mt-2 px-2 flex items-center m-2">
@@ -161,8 +183,7 @@ const NewsDetail: FC = () => {
             alt="User Avatar"
             className="w-10 h-10 rounded-full mr-2"
           />
-          <Box className="border border-slate-300
-           rounded-full flex-1 flex items-center px-4">
+          <Box className="border border-slate-300 rounded-full flex-1 flex items-center px-3">
             <Input
               type="text"
               placeholder="Viết bình luận..."
@@ -171,13 +192,13 @@ const NewsDetail: FC = () => {
               onChange={(e) => setNewComment(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleCommentSubmit();
+                  onCommentSubmit();
                 }
               }}
             />
             <Box
               className="cursor-pointer text-slate-500"
-              onClick={handleCommentSubmit}
+              onClick={onCommentSubmit}
             >
               <FaPaperPlane className="text-xl mr-2" />
             </Box>

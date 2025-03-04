@@ -1,10 +1,9 @@
-import React, { FC } from "react";
-import { useRecoilValue } from "recoil";
-import { newsState } from "state";
+import React, { FC, useEffect, useRef, useCallback } from "react";
 import { Box, Text } from "zmp-ui";
 import { displayDate } from "utils/date";
 import { FaCalendarAlt, FaComment, FaHeart, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import useNews from "hooks/useNews";
 
 const parseDateString = (dateString: string) => {
   const [day, month, year] = dateString.split('-').map(Number);
@@ -12,18 +11,30 @@ const parseDateString = (dateString: string) => {
 };
 
 const LatestNews: FC = () => {
-  const newsItems = useRecoilValue(newsState);
   const navigate = useNavigate();
+  const { news, loading, error, loadMore, hasMore } = useNews({ limit: 5 });
 
-  const handleNewsClick = (id: number) => {
+  const observer = useRef<IntersectionObserver>();
+  const lastNewsElementRef = useCallback((node: HTMLDivElement | null) => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        loadMore();
+      }
+    });
+    if (node) observer.current.observe(node);
+  }, [loading, hasMore, loadMore]);
+
+  const handleNewsClick = (id: string) => {
     navigate(`/news/${id}`);
   };
 
   return (
     <Box className="overflow-y-auto scrollable-content">
-      {newsItems.map((newsItem, index) => {
-        const commentCount = Math.floor(Math.random() * 100);
-        const likeCount = Math.floor(Math.random() * 500);
+      {news.map((newsItem, index) => {
+        const commentCount = newsItem.comment;
+        const likeCount = newsItem.like;
         const viewCount = newsItem.view;
 
         if (index === 0) {
@@ -36,7 +47,7 @@ const LatestNews: FC = () => {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={newsItem.image}
+                src={newsItem.thumbnail_url}
                 alt={newsItem.title}
                 className="w-full h-64 object-cover rounded-md mb-2"
               />
@@ -76,9 +87,10 @@ const LatestNews: FC = () => {
               className={`p-2 shadow-md flex items-center ${bgColor}`}
               onClick={() => handleNewsClick(newsItem.id)}
               style={{ cursor: "pointer" }}
+              ref={news.length === index + 1 ? lastNewsElementRef : null}
             >
               <img
-                src={newsItem.image}
+                src={newsItem.thumbnail_url}
                 alt={newsItem.title}
                 className="w-24 h-24 object-cover rounded-md mr-4"
               />
@@ -113,6 +125,8 @@ const LatestNews: FC = () => {
           );
         }
       })}
+      {loading && <Text>Loading...</Text>}
+      {error && <Text color="red">{error}</Text>}
     </Box>
   );
 };

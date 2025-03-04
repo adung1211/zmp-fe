@@ -11,34 +11,20 @@ import { calcFinalPrice } from "utils/product";
 import { wait } from "utils/async";
 import categories from "../mock/categories.json";
 import news from "../mock/news.json";
+import { NewsItem } from "types/news";
 
-export interface NewsItem {
-  created_at: string;
-  view: number;
-  id: number;
-  title: string;
-  content: string;
-  image: string;
-  tags: {
-    id: number;
-    name: string;
-    slug: string;
-    pivot: {
-      post_id: number;
-      post_tag_id: number;
-    };
-  }[];
-  created_by: string;
-}
+
+const initialNewsState: NewsItem[] = news.map((item) => ({
+  ...item,
+  image: item.thumbnail_url,
+  tags: item.tags || [],
+  created_by: item.created_by,
+  view: item.view,
+}));
 
 export const newsState = atom<NewsItem[]>({
   key: "news",
-  default: news.map((item) => ({
-    ...item,
-    image: item.thumbnail_url,
-    tags: item.tags,
-    created_by: item.created_by,
-  })),
+  default: initialNewsState,
 });
 
 import { User } from "types/user";

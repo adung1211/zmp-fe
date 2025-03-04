@@ -4,6 +4,7 @@ import NewsTabs from "components/NewsTabs";
 import LatestNews from "./LatestNews";
 import FeaturedNews from "./FeaturedNews";
 import { useNewsTab } from "hooks/useNewsTab";
+import useNews from "hooks/useNews";
 
 const NewsPage: FC = () => {
   const [tab] = useNewsTab();
