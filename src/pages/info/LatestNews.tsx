@@ -41,9 +41,9 @@ const LatestNews: FC = () => {
           // First news item (largest)
           return (
             <Box
-              key={newsItem.id}
+              key={newsItem._id}
               className="p-4 bg-white shadow-md border-b-2 border-gray border-opacity-15"
-              onClick={() => handleNewsClick(newsItem.id)}
+              onClick={() => handleNewsClick(newsItem._id)}
               style={{ cursor: "pointer" }}
             >
               <img
@@ -83,9 +83,9 @@ const LatestNews: FC = () => {
           const bgColor = index % 2 === 0 ? "" : "bg-zinc-100";
           return (
             <Box
-              key={newsItem.id}
+              key={newsItem._id}
               className={`p-2 shadow-md flex items-center ${bgColor}`}
-              onClick={() => handleNewsClick(newsItem.id)}
+              onClick={() => handleNewsClick(newsItem._id)}
               style={{ cursor: "pointer" }}
               ref={news.length === index + 1 ? lastNewsElementRef : null}
             >
