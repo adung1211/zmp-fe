@@ -110,6 +110,51 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
     }
   };
 
+  const handleEditComment = async (commentId: string, content: string) => {
+    if (!newsItemId || !userId || !content) return;
+    try {
+      const response = await axios.put(
+        `${API_URL}/posts/${newsItemId}/comments/${commentId}`,
+        { content: content },
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+            userId: userId,
+          },
+        }
+      );
+
+      // Update the comments state with the edited comment
+      setComments(
+        comments.map((comment) =>
+          comment._id === commentId ? response.data : comment
+        )
+      );
+    } catch (error: any) {
+      setError(error.message || "Failed to edit comment");
+    }
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    if (!newsItemId || !userId) return;
+    try {
+      await axios.delete(
+        `${API_URL}/posts/${newsItemId}/comments/${commentId}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+            userId: userId,
+          },
+        }
+      );
+
+      // Remove the deleted comment from state
+      setComments(comments.filter((comment) => comment._id !== commentId));
+    } catch (error: any) {
+      setError(error.message || "Failed to delete comment");
+    }
+  };
+
   return {
     newsItem,
     isLiked,
@@ -119,6 +164,8 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
     error,
     handleLikeClick,
     handleCommentSubmit,
+    handleEditComment,
+    handleDeleteComment,
   };
 };
 
