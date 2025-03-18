@@ -9,7 +9,7 @@ import { authAtom } from "./state";
 import { User } from "types/user";
 import { saveSession, getSession, clearSession } from "utils/storage";
 
-import { getUserInfo, getSetting } from "zmp-sdk/apis";
+import { getUserInfo, getSetting, authorize } from "zmp-sdk/apis";
 
 import { createUser, isUserExist } from "api/user";
 
@@ -18,6 +18,7 @@ export const useAuth = (): {
   login: () => Promise<void>;
   logout: () => Promise<void>;
   checkLoginOnStart: () => Promise<void>;
+  authorizeUser: () => Promise<void>;
 } => {
   const [user, setUser] = useRecoilState(authAtom);
 
@@ -33,6 +34,22 @@ export const useAuth = (): {
       login();
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const authorizeUser = async () => {
+    try {
+      const data = await authorize({
+        scopes: ["scope.userInfo", "scope.userPhonenumber"],
+      });
+      try {
+        login();
+      } catch (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      // xử lý khi gọi api thất bại
+      console.log("authorize error:", error);
     }
   };
 
@@ -76,7 +93,7 @@ export const useAuth = (): {
     clearSession();
   };
 
-  return { user, login, logout, checkLoginOnStart };
+  return { user, login, logout, checkLoginOnStart, authorizeUser };
 };
 
 export function useMatchStatusTextColor(visible?: boolean) {

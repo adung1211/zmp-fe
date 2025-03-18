@@ -1,8 +1,5 @@
 import React, { FC } from "react";
 import { Box, Header, Text } from "zmp-ui";
-import logo from "static/logo.png";
-import appConfig from "../../../app-config.json";
-import { getConfig } from "utils/config";
 
 import { useAuth } from "hooks";
 
@@ -17,7 +14,7 @@ export const  Welcome: FC = () => {
           <Box flex alignItems="center" className="space-x-2">
             <img
               className="w-10 h-10 rounded-full"
-              src={user?.avatar || "https://ui-avatars.com/api/?name=GU&background=random&size=56"}
+              src={user?.avatar || "https://www.citypng.com/public/uploads/preview/black-user-member-guest-icon-701751695037011q8iwf4mjbn.png"}
               alt="User"
             />
             <Box className="flex flex-col pl-2">

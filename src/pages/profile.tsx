@@ -48,8 +48,6 @@ const Subscription: FC = () => {
       // xử lý khi gọi api thất bại
       console.log("authorize error:", error);
     }
-    // console.log(await isUserExist("1211"));
-    // console.log(await createUser("123", "name", "avatar"));
   };
 
   return (

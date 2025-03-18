@@ -1,14 +1,12 @@
 
 import { useSearchParams } from 'react-router-dom';
 
-export type NewsTabType = 'latest' | 'featured';
-
 export function useNewsTab() {
   const [params, setParams] = useSearchParams();
 
-  const tab = (params.get('tab') || 'latest') as NewsTabType;
+  const tab = (params.get('tab') || 'latest') as string;
 
-  function setTab(tab: NewsTabType) {
+  function setTab(tab: string) {
     setParams({ tab });
   }
 

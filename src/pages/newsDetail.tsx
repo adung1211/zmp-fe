@@ -1,11 +1,10 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useRef} from "react";
 import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { newsState } from "state";
 import { Box, Text, Input } from "zmp-ui";
 import { displayDate } from "utils/date";
 import { Header, Page } from "zmp-ui";
-import { FaHeart, FaFlag, FaComment, FaCalendarAlt, FaPaperPlane, FaEdit, FaTrash, FaCheck, FaTimes, FaEllipsisV } from "react-icons/fa";
+import { FaHeart, FaFlag, FaComment, FaCalendarAlt, FaPaperPlane, 
+  FaEdit, FaTrash, FaCheck, FaTimes, FaEllipsisH, FaSignInAlt  } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { Divider } from "components/divider";
 import { useAuth } from "hooks";
@@ -25,9 +24,8 @@ const parseISOString = (dateString: string) => {
 
 const NewsDetail: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const newsItems = useRecoilValue(newsState);
 
-  const { user } = useAuth();
+  const { user, authorizeUser } = useAuth();
 
   const {
     newsItem,
@@ -51,10 +49,20 @@ const NewsDetail: FC = () => {
 
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
+  const commentsContainerRef = useRef<HTMLDivElement>(null);
+
+
   const onCommentSubmit = () => {
     if (newComment.trim() !== "") {
       handleCommentSubmit(newComment);
       setNewComment("");
+      // Scroll to the top of the comment section
+      if (commentsContainerRef.current) {
+        commentsContainerRef.current.scrollTo({
+          top: 0,
+          behavior: 'auto',
+        });
+      }
     }
   };
 
@@ -70,9 +78,7 @@ const NewsDetail: FC = () => {
     return <Text>News not found</Text>;
   }
 
-  const avatarUrl =
-    user?.avatar ||
-    "https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png";
+  const avatarUrl = user?.avatar;
 
   return (
     <Page className="relative flex-1 flex flex-col bg-white">
@@ -155,7 +161,10 @@ const NewsDetail: FC = () => {
 
         <Box className="">
           <Text.Title className="p-2">Bình luận</Text.Title>
-          <Box className="bg-slate-100 max-h-64 overflow-y-auto scrollable-content py-1">
+          <Box 
+            className="bg-slate-100 max-h-64 overflow-y-auto scrollable-content py-1"
+            ref={commentsContainerRef}
+          >
             {comments.map((comment) => (
               <Box
                 key={comment._id}
@@ -174,10 +183,6 @@ const NewsDetail: FC = () => {
                         {comment.userName}
                       </Text>
 
-                      <Text size="small" className=" whitespace-pre-wrap break-words">
-                          {comment.content}
-                      </Text>
-
                       
                     </Box>
                     
@@ -186,7 +191,7 @@ const NewsDetail: FC = () => {
                         className="p-1 cursor-pointer text-zinc-500"
                         onClick={() => setOpenDropdownId(openDropdownId === comment._id ? null : comment._id)}
                       >
-                        <FaEllipsisV className="text-sm" />
+                        <FaEllipsisH className="text-sm" />
                       </Box>
                       
                       {openDropdownId === comment._id && (
@@ -216,7 +221,7 @@ const NewsDetail: FC = () => {
                               </Box>
                             </>
                           )}
-                          <Box className="flexitems-center p-2 hover:bg-slate-100 rounded cursor-pointer">
+                          <Box className="flex items-center p-2 hover:bg-slate-100 rounded cursor-pointer">
                             {/* <Icon icon="zi-flag" className="text-xs mr-2" /> */}
                             <FaFlag className="text-xs mr-2" />
                             <Text size="xSmall">Báo cáo</Text>
@@ -253,12 +258,17 @@ const NewsDetail: FC = () => {
                       </Box>
                     </Box>
                   ) : (
-                      <Text
-                        size="xxxSmall"
-                        className="text-zinc-400 font-medium mt-1"
-                      >
-                        {displayDate(parseISOString(comment.createdAt))}
-                      </Text>
+                    <Box>
+                      <Text size="small" className=" whitespace-pre-wrap break-words">
+                      {comment.content}
+                        </Text>
+                        <Text
+                          size="xxxSmall"
+                          className="text-zinc-400 font-medium mt-1"
+                        >
+                          {displayDate(parseISOString(comment.createdAt))}
+                        </Text>
+                    </Box>
                   )}
                 </Box>
               </Box>
@@ -266,38 +276,54 @@ const NewsDetail: FC = () => {
           </Box>
         </Box>
         <Box className="p-2 py-3 flex items-center border-t border-slate-200">
-          <img
-            src={avatarUrl}
-            alt="User Avatar"
-            className="w-10 h-10 rounded-full mr-2"
-          />
-          <Box className="rounded-full flex-1 flex flex-col px-3 bg-slate-100">
-            <Box className="flex items-center w-full">
-              <Input
-                type="text"
-                placeholder="Viết bình luận..."
-                value={newComment}
-                className="border-none flex-1 bg-transparent"
-                onChange={(e) => {
-                  if (e.target.value.length <= 355) {
-                    setNewComment(e.target.value);
-                  }
-                }}
-                maxLength={35}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    onCommentSubmit();
-                  }
-                }}
+          {user ? (
+            <>
+              <img
+                src={avatarUrl}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full mr-2"
               />
-              <Box
-                className={`cursor-pointer text-slate-500 ${newComment.trim() === "" ? "opacity-50" : ""}`}
-                onClick={onCommentSubmit}
-              >
-                <FaPaperPlane className="text-xl mr-2" />
+              <Box className="rounded-full flex-1 flex flex-col px-3 bg-slate-100">
+                <Box className="flex items-center w-full">
+                  <Input
+                    type="text"
+                    placeholder="Viết bình luận..."
+                    value={newComment}
+                    className="border-none flex-1 bg-transparent"
+                    onChange={(e) => {
+                      if (e.target.value.length <= 355) {
+                        setNewComment(e.target.value);
+                      }
+                    }}
+                    maxLength={35}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        onCommentSubmit();
+                      }
+                    }}
+                  />
+                  <Box
+                    className={`cursor-pointer text-slate-500 ${newComment.trim() === "" ? "opacity-50" : ""}`}
+                    onClick={onCommentSubmit}
+                  >
+                    <FaPaperPlane className="text-xl mr-2" />
+                  </Box>
+                </Box>
+              </Box>
+            </>
+          ) : (
+            <Box 
+              className="flex-1 bg-slate-100 rounded-lg p-3 text-center cursor-pointer"
+              onClick={authorizeUser}
+            >
+              <Box className="flex items-center justify-center">
+                <FaSignInAlt className="mr-2 text-green" />
+                <Text className="text-green font-medium">
+                  Đăng nhập để viết bình luận
+                </Text>
               </Box>
             </Box>
-          </Box>
+          )}
         </Box>
       </Box>
     </Page>

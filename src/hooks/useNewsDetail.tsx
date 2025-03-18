@@ -20,10 +20,11 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
-  const userId = user? user.id : "2539805396614680484";
+  const userId = user? user.id : "";
+  
 
   useEffect(() => {
-    if (!newsItemId || !userId) {
+    if (!newsItemId) {
       setLoading(false);
       return;
     }
@@ -104,7 +105,7 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
       );
 
       // Add the new comment to the state
-      setComments([...comments, response.data]);
+      setComments([response.data, ...comments]);
     } catch (error: any) {
       setError(error.message || "Failed to add comment");
     }
