@@ -17,4 +17,5 @@ export interface NewsItem {
     };
   }[];
   created_by: string;
+  createdAt: Date;
 }

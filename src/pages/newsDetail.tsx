@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef} from "react";
 import { useParams } from "react-router-dom";
 import { Box, Text, Input } from "zmp-ui";
-import { displayDate } from "utils/date";
+import { displayDate, displayDateTime } from "utils/date";
 import { Header, Page } from "zmp-ui";
 import { FaHeart, FaFlag, FaComment, FaCalendarAlt, FaPaperPlane, 
   FaEdit, FaTrash, FaCheck, FaTimes, FaEllipsisH, FaSignInAlt  } from "react-icons/fa";
@@ -19,6 +19,7 @@ const parseDateString = (dateString: string) => {
 const parseISOString = (dateString: string) => {
   const [datePart, timePart] = dateString.split('T');
   const [year, month, day] = datePart.split('-').map(Number);
+  const [hour, minute, second] = timePart.split(':').map(Number);
   return new Date(year, month - 1, day);
 };
 
@@ -49,7 +50,7 @@ const NewsDetail: FC = () => {
 
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
-  const commentsContainerRef = useRef<HTMLDivElement>(null);
+  const commentsContainerRef = useRef<HTMLDivElement>(document.createElement('div'));
 
 
   const onCommentSubmit = () => {

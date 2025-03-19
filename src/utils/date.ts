@@ -41,3 +41,7 @@ export function displayDate(date: Date, hint?: boolean) {
   }
   return `${day}/${month}/${year}`;
 }
+
+export function displayDateTime(date: Date) {
+  return `${displayDate(date)}-${displayTime(date)}`;
+}
