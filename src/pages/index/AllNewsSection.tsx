@@ -32,20 +32,12 @@ export const AllNewsSectionContent: FC<AllNewsSectionProps> = ({ title, sortBy, 
     }
   };
 
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-
-  if (error) {
-    return <Text color="red">{error}</Text>;
-  }
-
   return (
     <Box className="bg-background px-2 py-4 space-y-4">
       <Box className="flex justify-between items-center px-2">
         <Text.Title>{title}</Text.Title>
-        <Box onClick={handleViewAllClick} className="cursor-pointer">
-          <FaAngleRight size={18} />
+        <Box onClick={handleViewAllClick} className="cursor-pointer text-primary font-semibold">
+          Tất cả
         </Box>
       </Box>
       <Swiper slidesPerView={1.25} spaceBetween={16} className="py-2">
@@ -54,9 +46,9 @@ export const AllNewsSectionContent: FC<AllNewsSectionProps> = ({ title, sortBy, 
             <Box className=" bg-white shadow-md">
               <img src={newsItem.thumbnail_url} alt={newsItem.title} className="w-full h-32 object-cover" />
               <Box className="p-4">
-                <Text.Title size="small" className="line-clamp-2">
-                  {newsItem.title}
-                </Text.Title>
+              <Text.Title size="small" className="line-clamp-2 min-h-[2.5rem]">
+                {newsItem.title}
+              </Text.Title>
                 <Box className="flex justify-between items-center mt-2 text-gray-500">
                   <Box className="flex items-center">
                     <FaCalendarAlt className="mr-1 text-zinc-500" />

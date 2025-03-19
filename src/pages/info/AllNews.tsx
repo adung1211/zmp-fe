@@ -142,8 +142,6 @@ const AllNews: FC<AllNewsProps> = ({ category, sortBy }) => {
           );
         }
       })}
-      {loading && <Text>Loading...</Text>}
-      {error && <Text color="red">{error}</Text>}
     </Box>
   );
 };

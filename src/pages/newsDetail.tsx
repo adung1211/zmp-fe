@@ -12,18 +12,6 @@ import useNewsDetail from "hooks/useNewsDetail";
 import { parseISOString } from "utils/date";
 
 
-// const parseDateString = (dateString: string) => {
-//   const [day, month, year] = dateString.split('-').map(Number);
-//   return new Date(year, month - 1, day);
-// };
-
-// const parseISOString = (dateString: string) => {
-//   const [datePart, timePart] = dateString.split('T');
-//   const [year, month, day] = datePart.split('-').map(Number);
-//   const [hour, minute, second] = timePart.split(':').map(Number);
-//   return new Date(year, month - 1, day);
-// };
-
 const NewsDetail: FC = () => {
   const { id } = useParams<{ id: string }>();
 
@@ -67,17 +55,15 @@ const NewsDetail: FC = () => {
       }
     }
   };
-
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-
-  if (error) {
-    return <Text color="red">{error}</Text>;
-  }
-
   if (!newsItem) {
-    return <Text>News not found</Text>;
+    return (
+    <Page className="relative flex-1 flex flex-col bg-white">
+    <Header
+        className="app-header no-border flex-none pl-4 text-white bg-green"
+        title="Chi tiết tin tức"
+      />
+    </Page>
+    );
   }
 
   const avatarUrl = user?.avatar;

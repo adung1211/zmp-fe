@@ -19,14 +19,6 @@ const NewsTabs: FC = () => {
     setTab(value);
   };
 
-  if (loading) {
-    return <Text>Loading categories...</Text>;
-  }
-
-  if (error) {
-    return <Text color="red">Error: {error}</Text>;
-  }
-
   return (
     <Box className="bg-white shadow-md">
       <Tabs activeKey={tab} onChange={handleTabChange} className="px-4" scrollable>
