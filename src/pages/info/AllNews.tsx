@@ -1,23 +1,23 @@
-import React, { FC, useEffect, useRef, useCallback } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { Box, Text } from "zmp-ui";
 import { displayDate } from "utils/date";
 import { FaCalendarAlt, FaComment, FaHeart, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useNews from "hooks/useNews";
 
-interface CategoryNewsProps {
-  categoryId: string;
-}
-
 const parseDateString = (dateString: string) => {
   const [day, month, year] = dateString.split('-').map(Number);
   return new Date(year, month - 1, day);
 };
 
-const CategoryNews: FC<CategoryNewsProps> = ({ categoryId }) => {
-  const navigate = useNavigate();
-  const { news, loading, error, loadMore, hasMore} = useNews({ limit: 5, category: categoryId });
+interface AllNewsProps {
+  category?: string;
+  sortBy?: string;
+}
 
+const AllNews: FC<AllNewsProps> = ({ category, sortBy }) => {
+  const navigate = useNavigate();
+  const { news, loading, error, loadMore, hasMore } = useNews({ limit: 10, category: category, sortBy: sortBy });
   const observer = useRef<IntersectionObserver | null>(null);
   const lastNewsElementRef = useRef<HTMLDivElement>(document.createElement('div'));
 
@@ -43,18 +43,19 @@ const CategoryNews: FC<CategoryNewsProps> = ({ categoryId }) => {
         observer.current.disconnect();
       }
     };
-  }, [loading, hasMore, loadMore, news]);
+  }, [loading, hasMore, loadMore, news, category, sortBy]);
 
   const handleNewsClick = (id: string) => {
     navigate(`/news/${id}`);
   };
 
-return (
+  return (
     <Box className="overflow-y-auto scrollable-content">
       {news.map((newsItem, index) => {
         const commentCount = newsItem.comment;
         const likeCount = newsItem.like;
         const viewCount = newsItem.view;
+        const isLastElement = news.length === index + 1;
 
         if (index === 0) {
           // First news item (largest)
@@ -150,5 +151,4 @@ return (
   );
 };
 
-
-export default CategoryNews;
+export default AllNews;

@@ -7,9 +7,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 interface UseNewsProps {
   limit: number;
   category?: string;
+  sortBy?: string;
 }
 
-const useNews = ({ limit, category }: UseNewsProps) => {
+const useNews = ({ limit, category, sortBy }: UseNewsProps) => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -21,12 +22,13 @@ const useNews = ({ limit, category }: UseNewsProps) => {
       setLoading(true);
       setError(null);
       try {
-        console.log( "page:", page, "limit:", limit, "category:", category);
+        console.log( "page:", page, "limit:", limit, "category:", category, "sortBy:", sortBy);
         const response = await axios.get(`${API_URL}/posts`, {
           params: {
             page,
             limit,
             category,
+            sortBy,
           },
           headers: { "ngrok-skip-browser-warning": "69420" },
         });
@@ -49,7 +51,7 @@ const useNews = ({ limit, category }: UseNewsProps) => {
     };
 
     fetchNews();
-  }, [page, limit, category]);
+  }, [page, limit, category, sortBy]);
 
   const loadMore = () => {
     if (hasMore && !loading) {

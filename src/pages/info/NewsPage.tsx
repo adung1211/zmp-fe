@@ -1,11 +1,8 @@
 import React, { FC, useEffect } from "react";
 import { Box, Page, Header } from "zmp-ui";
 import NewsTabs from "components/NewsTabs";
-import LatestNews from "./LatestNews";
-import FeaturedNews from "./FeaturedNews";
-import CategoryNews from "./CategoryNews";
 import { useNewsTab } from "hooks/useNewsTab";
-import useNews from "hooks/useNews";
+import AllNews from "./AllNews";
 
 const NewsPage: FC = () => {
   const [tab] = useNewsTab();
@@ -17,10 +14,9 @@ const NewsPage: FC = () => {
       
       <NewsTabs />
       <Box className="overflow-x-hidden mt-[-1px] scrollable-content">
-        {tab === 'latest' && <LatestNews />}
-        {tab === 'featured' && <FeaturedNews />}
-        {/* Render CategoryNews if tab is a category ID */}
-        {tab !== 'latest' && tab !== 'featured' && <CategoryNews key={tab} categoryId={tab} />}
+        {tab === 'latest' && <AllNews />}
+        {tab === 'featured' && <AllNews sortBy="view"/>}
+        {tab !== 'latest' && tab !== 'featured' && <AllNews key={tab} category={tab} />}
       </Box>
     </Page>
   );
