@@ -18,17 +18,32 @@ const CategoryNews: FC<CategoryNewsProps> = ({ categoryId }) => {
   const navigate = useNavigate();
   const { news, loading, error, loadMore, hasMore} = useNews({ limit: 5, category: categoryId });
 
-  const observer = useRef<IntersectionObserver>();
-  const lastNewsElementRef = useCallback((node: HTMLDivElement | null) => {
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastNewsElementRef = useRef<HTMLDivElement>(document.createElement('div'));
+
+  useEffect(() => {
     if (loading) return;
-    if (observer.current) observer.current.disconnect();
+
+    if (observer.current) {
+      observer.current.disconnect();
+    }
+
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
         loadMore();
       }
     });
-    if (node) observer.current.observe(node);
-  }, [loading, hasMore, loadMore]);
+
+    if (lastNewsElementRef.current) {
+      observer.current.observe(lastNewsElementRef.current);
+    }
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [loading, hasMore, loadMore, news]);
 
   const handleNewsClick = (id: string) => {
     navigate(`/news/${id}`);
@@ -91,7 +106,7 @@ return (
               className={`p-2 shadow-md flex items-center ${bgColor}`}
               onClick={() => handleNewsClick(newsItem._id)}
               style={{ cursor: "pointer" }}
-              ref={news.length === index + 1 ? lastNewsElementRef : null}
+              ref={lastNewsElementRef}
             >
               <img
                 src={newsItem.thumbnail_url}
