@@ -45,3 +45,28 @@ export function displayDate(date: Date, hint?: boolean) {
 export function displayDateTime(date: Date) {
   return `${displayDate(date)}-${displayTime(date)}`;
 }
+
+
+// const parseDateString = (dateString: string) => {
+//   const [day, month, year] = dateString.split('-').map(Number);
+//   return new Date(year, month - 1, day);
+// };
+
+export function parseDateString(dateString: string) {
+  const [day, month, year] = dateString.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+// const parseISOString = (dateString: string) => {
+//   const [datePart, timePart] = dateString.split('T');
+//   const [year, month, day] = datePart.split('-').map(Number);
+//   const [hour, minute, second] = timePart.split(':').map(Number);
+//   return new Date(year, month - 1, day);
+// };
+
+export function parseISOString(dateString: string) {
+  const [datePart, timePart] = dateString.split('T');
+  const [year, month, day] = datePart.split('-').map(Number);
+  const [hour, minute, second] = timePart.split(':').map(Number);
+  return new Date(year, month - 1, day);
+}

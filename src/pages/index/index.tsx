@@ -3,9 +3,7 @@ import { Box, Page } from "zmp-ui";
 import { Welcome } from "./welcome";
 import QuickAcess from "./quickacess";
 import { Divider } from "components/divider";
-import { Recommend } from "./recommend";
-import { Latest } from "./latest"; 
-import { Popular } from "./popular";
+import { AllNewsSection } from "./AllNewsSection";
 
 const HomePage: React.FunctionComponent = () => {
   return (
@@ -16,11 +14,11 @@ const HomePage: React.FunctionComponent = () => {
 
         <QuickAcess /> 
         <Divider size={20} /> 
-        <Recommend/>
         <Divider />
-        <Latest/>
+        <AllNewsSection title="Tin tức mới nhất" />
         <Divider />
-        <Popular/>
+        <AllNewsSection title="Tin tức nổi bật" sortBy="view" />
+
       </Box>
     </Page>
   );

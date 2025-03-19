@@ -3,12 +3,9 @@ import { Box, Text } from "zmp-ui";
 import { displayDate } from "utils/date";
 import { FaCalendarAlt, FaComment, FaHeart, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { parseDateString, parseISOString } from "utils/date";
 import useNews from "hooks/useNews";
 
-const parseDateString = (dateString: string) => {
-  const [day, month, year] = dateString.split('-').map(Number);
-  return new Date(year, month - 1, day);
-};
 
 interface AllNewsProps {
   category?: string;
@@ -78,7 +75,7 @@ const AllNews: FC<AllNewsProps> = ({ category, sortBy }) => {
                 <Box className="flex items-center">
                   <FaCalendarAlt className="mr-1 text-zinc-500" />
                   <Text size="xSmall" className="text-zinc-500">
-                    {displayDate(parseDateString(newsItem.created_at))}
+                    {displayDate(parseISOString(newsItem.createdAt))}
                   </Text>
                 </Box>
                 <Box className="flex items-center text-zinc-500">
@@ -122,7 +119,7 @@ const AllNews: FC<AllNewsProps> = ({ category, sortBy }) => {
                   <Box className="flex items-center">
                     <FaCalendarAlt className="mr-1 text-zinc-500" />
                     <Text size="xSmall" className="text-zinc-500">
-                      {displayDate(parseDateString(newsItem.created_at))}
+                      {displayDate(parseISOString(newsItem.createdAt))}
                     </Text>
                   </Box>
                   <Box className="flex items-center text-zinc-500">

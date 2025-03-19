@@ -9,19 +9,20 @@ import { FaEye } from "react-icons/fa";
 import { Divider } from "components/divider";
 import { useAuth } from "hooks";
 import useNewsDetail from "hooks/useNewsDetail";
+import { parseISOString } from "utils/date";
 
 
-const parseDateString = (dateString: string) => {
-  const [day, month, year] = dateString.split('-').map(Number);
-  return new Date(year, month - 1, day);
-};
+// const parseDateString = (dateString: string) => {
+//   const [day, month, year] = dateString.split('-').map(Number);
+//   return new Date(year, month - 1, day);
+// };
 
-const parseISOString = (dateString: string) => {
-  const [datePart, timePart] = dateString.split('T');
-  const [year, month, day] = datePart.split('-').map(Number);
-  const [hour, minute, second] = timePart.split(':').map(Number);
-  return new Date(year, month - 1, day);
-};
+// const parseISOString = (dateString: string) => {
+//   const [datePart, timePart] = dateString.split('T');
+//   const [year, month, day] = datePart.split('-').map(Number);
+//   const [hour, minute, second] = timePart.split(':').map(Number);
+//   return new Date(year, month - 1, day);
+// };
 
 const NewsDetail: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -114,7 +115,7 @@ const NewsDetail: FC = () => {
               <Box className="flex items-center">
                 <FaCalendarAlt className="mr-2 text-zinc-500" />
                 <Text size="normal" className="text-zinc-500 font-medium">
-                  {displayDate(parseDateString(newsItem.created_at))}
+                  {displayDate(parseISOString(newsItem.createdAt))}
                 </Text>
               </Box>
               <Box className="flex items-center text-xl mt-3">
