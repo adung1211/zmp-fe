@@ -8,9 +8,10 @@ interface UseNewsProps {
   limit: number;
   category?: string;
   sortBy?: string;
+  searchTerm?: string;
 }
 
-const useNews = ({ limit, category, sortBy }: UseNewsProps) => {
+const useNews = ({ limit, category, sortBy, searchTerm }: UseNewsProps) => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ const useNews = ({ limit, category, sortBy }: UseNewsProps) => {
             limit,
             category,
             sortBy,
+            query: searchTerm, // Include the search term in the API request
           },
           headers: { "ngrok-skip-browser-warning": "69420" },
         });
@@ -51,7 +53,7 @@ const useNews = ({ limit, category, sortBy }: UseNewsProps) => {
     };
 
     fetchNews();
-  }, [page, limit, category, sortBy]);
+  }, [page, limit, category, sortBy, searchTerm]);
 
   const loadMore = () => {
     if (hasMore && !loading) {

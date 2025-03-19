@@ -60,7 +60,7 @@ const NewsDetail: FC = () => {
     }
   };
 
-  const { shareCurrentPage, copyLink } = useShareAndCopyLink({ newsItem });
+  const { shareCurrentPage, copyLink } = useShareAndCopyLink({ newsItem: newsItem || null });
 
   if (!newsItem) {
     return (

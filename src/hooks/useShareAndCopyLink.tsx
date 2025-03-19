@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { getAppInfo, openShareSheet } from "zmp-sdk/apis";
-import { newsItem } from "../types/news";
+import { NewsItem } from "../types/news";
 
 interface UseShareAndCopyLinkProps {
-  newsItem: newsItem | null;
+  newsItem: NewsItem | null;
 }
 
 const useShareAndCopyLink = ({ newsItem }: UseShareAndCopyLinkProps) => {

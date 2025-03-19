@@ -7,16 +7,15 @@ import { parseDateString, parseISOString } from "utils/date";
 import useNews from "hooks/useNews";
 
 
-interface AllNewsProps {
+interface SearchNewsProps {
   category?: string;
   sortBy?: string;
   searchTerm?: string;
 }
 
-const AllNews: FC<AllNewsProps> = ({ category, sortBy, searchTerm }) => {
+const SearchNews: FC<SearchNewsProps> = ({ category, sortBy, searchTerm }) => {
   const navigate = useNavigate();
-  const { news, loading, error, loadMore, hasMore } 
-    = useNews({ limit: 10, category: category, sortBy: sortBy, searchTerm: searchTerm });
+  const { news, loading, error, loadMore, hasMore } = useNews({ limit: 10, category: category, sortBy: sortBy, searchTerm: searchTerm });
   const observer = useRef<IntersectionObserver | null>(null);
   const lastNewsElementRef = useRef<HTMLDivElement>(document.createElement('div'));
 
@@ -56,7 +55,8 @@ const AllNews: FC<AllNewsProps> = ({ category, sortBy, searchTerm }) => {
         const viewCount = newsItem.view;
         const isLastElement = news.length === index + 1;
 
-        if (index === 0 && !searchTerm) {
+        if (index === 0) {
+          // First news item (largest)
           return (
             <Box
               key={newsItem._id}
@@ -147,4 +147,4 @@ const AllNews: FC<AllNewsProps> = ({ category, sortBy, searchTerm }) => {
   );
 };
 
-export default AllNews;
+export default SearchNews;
