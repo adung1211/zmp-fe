@@ -4,12 +4,16 @@ import { Box, Text, Input } from "zmp-ui";
 import { displayDate, displayDateTime } from "utils/date";
 import { Header, Page } from "zmp-ui";
 import { FaHeart, FaFlag, FaComment, FaCalendarAlt, FaPaperPlane, 
-  FaEdit, FaTrash, FaCheck, FaTimes, FaEllipsisH, FaSignInAlt  } from "react-icons/fa";
+  FaEdit, FaTrash, FaCheck, FaTimes, FaEllipsisH, FaSignInAlt, FaLink  } from "react-icons/fa";
+import { PiShareNetworkDuotone } from "react-icons/pi";
+
 import { FaEye } from "react-icons/fa";
 import { Divider } from "components/divider";
 import { useAuth } from "hooks";
 import useNewsDetail from "hooks/useNewsDetail";
 import { parseISOString } from "utils/date";
+import { openShareSheet, getAppInfo } from "zmp-sdk/apis";
+import useShareAndCopyLink from "hooks/useShareAndCopyLink";
 
 
 const NewsDetail: FC = () => {
@@ -55,6 +59,9 @@ const NewsDetail: FC = () => {
       }
     }
   };
+
+  const { shareCurrentPage, copyLink } = useShareAndCopyLink({ newsItem });
+
   if (!newsItem) {
     return (
     <Page className="relative flex-1 flex flex-col bg-white">
@@ -136,6 +143,23 @@ const NewsDetail: FC = () => {
             >
               <FaHeart className="text-xl" />
             </Box>
+          </Box>
+        </Box>
+        <Box className="grid grid-cols-2 gap-2 px-2 pb-2
+        ">
+          <Box className="flex flex-col items-center border border-primary rounded-lg px-4 py-2"
+            onClick={copyLink}>
+            <FaLink className="text-xl text-primary" />
+            <Text size="xSmall"
+            className="mt-1 text-primary font-medium"
+            >Copy đường dẫn</Text>
+          </Box>
+          <Box className="flex flex-col items-center rounded-lg bg-primary px-4 py-2"
+            onClick={shareCurrentPage}>
+            <PiShareNetworkDuotone className="text-2xl text-white" />
+            <Text size="xSmall"
+            className="mt-1 font-medium text-white"
+            >Chia sẻ qua Zalo</Text>
           </Box>
         </Box>
         <Divider />
