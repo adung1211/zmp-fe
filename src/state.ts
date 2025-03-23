@@ -20,6 +20,7 @@ const initialNewsState: NewsItem[] = news.map((item) => ({
   tags: item.tags || [],
   created_by: item.created_by,
   view: item.view,
+  createdAt: item.created_at || new Date().toISOString(),
 }));
 
 export const newsState = atom<NewsItem[]>({
@@ -44,7 +45,12 @@ export const userState = selector({
 
 export const categoriesState = selector<Category[]>({
   key: "categories",
-  get: () => categories,
+  get: () => categories.map(category => ({
+    ...category,
+    description: '',
+    slug: category.id,
+    thumbnail: ''
+  })) as Category[],
 });
 
 export const productsState = selector<Product[]>({

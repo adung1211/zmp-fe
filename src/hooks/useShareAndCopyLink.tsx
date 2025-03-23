@@ -18,7 +18,6 @@ const useShareAndCopyLink = ({ newsItem }: UseShareAndCopyLinkProps) => {
       success: (data) => {
         setAppUrl(data.appUrl);
         setAppVersion(data.version);
-        alert("App data: " + JSON.stringify(data));
       },
       fail: (error) => {
         console.error("Failed to get app info:", error);
