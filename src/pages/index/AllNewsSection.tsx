@@ -2,7 +2,7 @@ import React, { FC, Suspense } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Box, Text } from "zmp-ui";
 import { displayDate } from "utils/date";
-import { FaEye, FaCalendarAlt, FaAngleRight } from "react-icons/fa";
+import { FaEye, FaCalendarAlt, FaAngleRight, FaComment, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useNews from "hooks/useNews";
 import { parseISOString } from "utils/date";
@@ -57,8 +57,18 @@ export const AllNewsSectionContent: FC<AllNewsSectionProps> = ({ title, sortBy, 
                     </Text>
                   </Box>
                   <Box className="flex items-center text-slate-500">
-                    <FaEye className="mr-2" />
-                    <Text size="small">{newsItem.view} views</Text>
+                    <Box className="flex items-center mr-3 text-blue-400">
+                      <FaComment className="mr-1" />
+                      <Text size="xSmall">{newsItem.comment}</Text>
+                    </Box>
+                    <Box className="flex items-center mr-3 text-red-400">
+                      <FaHeart className="mr-1" />
+                      <Text size="xSmall">{newsItem.like}</Text>
+                    </Box>
+                    <Box className="flex items-center text-slate-500">
+                      <FaEye className="mr-1" />
+                      <Text size="xSmall">{newsItem.view}</Text>
+                    </Box>
                   </Box>
                 </Box>
               </Box>
