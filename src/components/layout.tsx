@@ -10,6 +10,7 @@ import { useHandlePayment } from "hooks";
 import NewsDetail from "../pages/newsDetail";
 import NewsPage from "../pages/info/NewsPage";
 import ServicePage from "../pages/service/ServicePage";
+import WeatherPage from "../pages/service/weatherPage";
 
 import { useAuth } from "hooks";
 
@@ -43,6 +44,7 @@ export const Layout: FC = () => {
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/info" element={<NewsPage />} />
           <Route path='/service' element={<ServicePage />} />
+          <Route path='/service/weather' element={<WeatherPage />} />
         </Routes>
       </Box>
       <Navigation />

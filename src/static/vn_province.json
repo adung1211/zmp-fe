@@ -1,0 +1,695 @@
+[
+    {
+        "id": 1594446,
+        "name": "An Giang",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.166672,
+            "lat": 10.5
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1584534,
+        "name": "Bà Rịa - Vũng Tàu",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.25,
+            "lat": 10.58333
+        },
+        "region": "Đông Nam Bộ"
+    },
+    {
+        "id": 1905475,
+        "name": "Bình Dương",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.666672,
+            "lat": 11.16667
+        },
+        "region": "Đông Nam Bộ"
+    },
+    {
+        "id": 1905480,
+        "name": "Bình Phước",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.916672,
+            "lat": 11.75
+        },
+        "region": "Đông Nam Bộ"
+    },
+    {
+        "id": 1581882,
+        "name": "Bình Thuận",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 108.0,
+            "lat": 11.08333
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1587871,
+        "name": "Bình Định",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 109.0,
+            "lat": 14.16667
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1905675,
+        "name": "Bạc Liêu",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.75,
+            "lat": 9.25
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1905419,
+        "name": "Bắc Giang",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.333328,
+            "lat": 21.33333
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1905669,
+        "name": "Bắc Kạn",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.833328,
+            "lat": 22.16667
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1905412,
+        "name": "Bắc Ninh",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.166672,
+            "lat": 21.08333
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1587974,
+        "name": "Bến Tre",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.5,
+            "lat": 10.16667
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1586182,
+        "name": "Cao Bằng",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.0,
+            "lat": 22.66667
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1905678,
+        "name": "Cà Mau",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.083328,
+            "lat": 9.08333
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1581188,
+        "name": "Cần Thơ",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.666672,
+            "lat": 9.83333
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1581088,
+        "name": "Gia Lai",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 108.25,
+            "lat": 13.75
+        },
+        "region": "Tây Nguyên"
+    },
+    {
+        "id": 1581030,
+        "name": "Hà Giang",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.0,
+            "lat": 22.75
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1581031,
+        "name": "Hậu Giang",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.6146948,
+            "lat": 9.767292
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1905637,
+        "name": "Hà Nam",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.0,
+            "lat": 20.58333
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1580700,
+        "name": "Hà Tĩnh",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.75,
+            "lat": 18.33333
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1572594,
+        "name": "Hoà Bình",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.25,
+            "lat": 20.33333
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1905699,
+        "name": "Hưng Yên",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.083328,
+            "lat": 20.83333
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1905686,
+        "name": "Hải Dương",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.333328,
+            "lat": 20.91667
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1579634,
+        "name": "Khánh Hoà",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 109.0,
+            "lat": 12.33333
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1579008,
+        "name": "Kiên Giang",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.166672,
+            "lat": 10.0
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1565088,
+        "name": "Kon Tum",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.916672,
+            "lat": 14.75
+        },
+        "region": "Tây Nguyên"
+    },
+    {
+        "id": 1583478,
+        "name": "Lai Châu",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 103.452437,
+            "lat": 22.397369
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1575788,
+        "name": "Long An",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.166672,
+            "lat": 10.66667
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1562412,
+        "name": "Lào Cai",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 104.0,
+            "lat": 22.33333
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1577882,
+        "name": "Lâm Đồng",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 108.333328,
+            "lat": 11.5
+        },
+        "region": "Tây Nguyên"
+    },
+    {
+        "id": 1576632,
+        "name": "Lạng Sơn",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.5,
+            "lat": 21.75
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1905626,
+        "name": "Nam Định",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.25,
+            "lat": 20.25
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1559969,
+        "name": "Nghệ An",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 104.833328,
+            "lat": 19.33333
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1559970,
+        "name": "Ninh Bình",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.833328,
+            "lat": 20.25
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1559971,
+        "name": "Ninh Thuận",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 108.833328,
+            "lat": 11.75
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1905577,
+        "name": "Phú Thọ",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.166672,
+            "lat": 21.33333
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1569805,
+        "name": "Phú Yên",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 109.166672,
+            "lat": 13.16667
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1568839,
+        "name": "Quảng Bình",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.333328,
+            "lat": 17.5
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1905516,
+        "name": "Quảng Nam",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.916672,
+            "lat": 15.58333
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1568769,
+        "name": "Quảng Ngãi",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 108.666672,
+            "lat": 15.0
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1568758,
+        "name": "Quảng Ninh",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.333328,
+            "lat": 21.25
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1568733,
+        "name": "Quảng Trị",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.0,
+            "lat": 16.75
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1559972,
+        "name": "Sóc Trăng",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.833328,
+            "lat": 9.66667
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1567643,
+        "name": "Sơn La",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 104.0,
+            "lat": 21.16667
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1566165,
+        "name": "Thanh Hoá",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.5,
+            "lat": 20.0
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1581297,
+        "name": "Hải Phòng",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.583328,
+            "lat": 20.83333
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1580578,
+        "name": "TP.Hồ Chí Minh",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.666672,
+            "lat": 10.83333
+        },
+        "region": "Đông Nam Bộ"
+    },
+    {
+        "id": 1566338,
+        "name": "Thái Bình",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.333328,
+            "lat": 20.5
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1905497,
+        "name": "Thái Nguyên",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.833328,
+            "lat": 21.66667
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1581129,
+        "name": "Hà Nội",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.883331,
+            "lat": 21.116671
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1565033,
+        "name": "Thừa Thiên Huế",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.583328,
+            "lat": 16.33333
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1564676,
+        "name": "Tiền Giang",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.166672,
+            "lat": 10.41667
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1559975,
+        "name": "Trà Vinh",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.25,
+            "lat": 9.83333
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1559976,
+        "name": "Tuyên Quang",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.25,
+            "lat": 22.116671
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1566557,
+        "name": "Tây Ninh",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.166672,
+            "lat": 11.33333
+        },
+        "region": "Đông Nam Bộ"
+    },
+    {
+        "id": 1559977,
+        "name": "Vĩnh Long",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 106.0,
+            "lat": 10.16667
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1905856,
+        "name": "Vĩnh Phúc",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.599998,
+            "lat": 21.299999
+        },
+        "region": "Đồng bằng sông Hồng"
+    },
+    {
+        "id": 1559978,
+        "name": "Yên Bái",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 104.666672,
+            "lat": 21.5
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1905468,
+        "name": "Đà Nẵng",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 108.083328,
+            "lat": 16.08333
+        },
+        "region": "Bắc Trung Bộ và Duyên hải miền Trung"
+    },
+    {
+        "id": 1584169,
+        "name": "Đắc Lắk",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 108.166672,
+            "lat": 12.83333
+        },
+        "region": "Tây Nguyên"
+    },
+    {
+        "id": 1582720,
+        "name": "Đồng Nai",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.166672,
+            "lat": 11.0
+        },
+        "region": "Đông Nam Bộ"
+    },
+    {
+        "id": 1582562,
+        "name": "Đồng Tháp",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 105.666672,
+            "lat": 10.66667
+        },
+        "region": "Đồng bằng sông Cửu Long"
+    },
+    {
+        "id": 1583477,
+        "name": "Điện Biên",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 103.01667,
+            "lat": 21.383329
+        },
+        "region": "Trung du và miền núi phía Bắc"
+    },
+    {
+        "id": 1566171,
+        "name": "Đắk Nông",
+        "state": "",
+        "country": "VN",
+        "coord": {
+            "lon": 107.5849151,
+            "lat": 12.1885207
+        },
+        "region": "Tây Nguyên"
+    }
+]
