@@ -32,7 +32,7 @@ const NewsTabs: FC = () => {
         />
         {categoryTabs.map((category) => (
           <Tabs.Tab
-            key={category.id}
+            key={category._id}
             label={<Text className=" font-semibold">{category.name}</Text>}
           />
         ))}

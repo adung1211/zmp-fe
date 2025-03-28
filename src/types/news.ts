@@ -8,7 +8,6 @@ export interface NewsItem {
   content: string;
   thumbnail_url: string;
   tags: {
-    id: number;
     name: string;
     slug: string;
     pivot: {

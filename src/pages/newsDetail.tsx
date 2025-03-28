@@ -95,7 +95,7 @@ const NewsDetail: FC = () => {
             {newsItem.tags && Array.isArray(newsItem.tags) ? (
               newsItem.tags.map((tag) => (
                 <Box
-                  key={tag.id}
+                  key={tag.name}
                   className="bg-slate-200 text-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
                 >
                   {tag.name}

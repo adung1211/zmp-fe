@@ -1,12 +1,10 @@
 export interface Category {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   slug: string;
   thumbnail: string;
 }
-
-
 
 // id
 // "41"
