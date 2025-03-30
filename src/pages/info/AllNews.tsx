@@ -97,7 +97,6 @@ const AllNews: FC<AllNewsProps> = ({ category, sortBy, searchTerm }) => {
             </Box>
           );
         } else {
-          // Subsequent news items (smaller, alternating background)
           const bgColor = index % 2 === 0 ? "" : "bg-zinc-100";
           return (
             <Box
@@ -112,11 +111,13 @@ const AllNews: FC<AllNewsProps> = ({ category, sortBy, searchTerm }) => {
                 alt={newsItem.title}
                 className="w-24 h-24 object-cover rounded-md mr-4"
               />
-              <Box>
-                <Text.Title size="small" className="mb-1 line-clamp-3">
-                  {newsItem.title}
-                </Text.Title>
-                <Box className="flex items-center justify-between mb-1 mr-1">
+              <Box className="flex-col flex-1 justify-between">
+                <Box>
+                  <Text.Title size="small" className="mb-1 line-clamp-3">
+                    {newsItem.title}
+                  </Text.Title>
+                </Box>
+                <Box className="flex justify-between mb-1 mr-1">
                   <Box className="flex items-center">
                     <FaCalendarAlt className="mr-1 text-zinc-500" />
                     <Text size="xSmall" className="text-zinc-500">
