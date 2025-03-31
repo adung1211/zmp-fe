@@ -10,7 +10,7 @@ const HomePage: React.FunctionComponent = () => {
     <Page className="relative flex-1 flex flex-col bg-white ">
       <Welcome />
       <Box className="overflow-x-hidden mt-[-1px] scrollable-content">
-        <div className="bg-green mx-[-20px] pt-12 rounded-b-full"></div>
+        <div className="bg-green-700 mx-[-20px] pt-12 rounded-b-full"></div>
 
         <QuickAcess /> 
         <Divider size={20} /> 

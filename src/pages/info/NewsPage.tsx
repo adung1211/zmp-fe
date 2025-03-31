@@ -14,9 +14,9 @@ const NewsPage: FC = () => {
   };
 
   return (
-    <Page className="bg-gray-relative flex-1 flex flex-col bg-white ">
+    <Page className="bg-gray elative flex-1 flex flex-col bg-white ">
       <Header title="Tin Tức"
-       className="bg-green text-white"
+       className="bg-green-700 text-white"
        />
       <SearchInput onSearch={handleSearch} />
       <NewsTabs />

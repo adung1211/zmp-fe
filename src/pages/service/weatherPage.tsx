@@ -85,7 +85,7 @@ const WeatherPage = () => {
 
   return (
     <Page className="relative flex-1 flex flex-col bg-white">
-      <Header title="Thời tiết" className="bg-green text-white text" />
+      <Header title="Thời tiết" className="bg-green-700 text-white text" />
       <Box className="py-4 overflow-x-hidden scrollable-content bg-sky-200">
         <Box className="mx-auto max-w-48">
           <Select
@@ -108,10 +108,6 @@ const WeatherPage = () => {
           </Select>
         </Box>
         
-        {weatherLoading && <Text className="text-center mt-4">Đang tải dữ liệu...</Text>}
-        
-        {weatherError && <Text className="text-center mt-4 text-red-500">Lỗi: {weatherError}</Text>}
-        
         {weather && (
           <Box className="mt-4 py-4 justify-center">
             <Box className="flex-col items-center mb-2 justify-items-center">
@@ -132,72 +128,72 @@ const WeatherPage = () => {
             {/* Current weather grid */}
             <Box className="grid grid-rows-3 grid-cols-2 gap-2 px-3 mb-4">
               <Box className="flex-col items-center justify-items-center bg-gradient-to-b from-white to-sky-100 rounded-lg shadow-lg py-1">
-                <Text className="text-base text-slate-700 font-medium">
+                <Text className="text-base text-slate-700">
                   Thời gian
                 </Text>
                 <Box className="flex items-center justify-center">
                   <FaClock className="text-lime-500 mr-2" />
-                  <Text className="text-lg text-zinc-800 font-semibold">
+                  <Text className="text-lg text-zinc-800 font-medium">
                     {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </Text>
                 </Box>
               </Box>
 
               <Box className="flex-col items-center justify-items-center bg-gradient-to-b from-white to-sky-100 rounded-lg shadow-lg py-1">
-                <Text className="text-base text-slate-700 font-medium">
+                <Text className="text-base text-slate-700">
                   Độ ẩm
                 </Text>
                 <Box className="flex items-center justify-center">
                   <FaTint className="text-blue-500 mr-2" />
-                  <Text className="text-lg text-zinc-800 font-semibold">
+                  <Text className="text-lg text-zinc-800 font-medium">
                     {weather.humidity}%
                   </Text>
                 </Box>
               </Box>
               
               <Box className="flex-col items-center justify-items-center rounded-lg shadow-lg py-1 bg-gradient-to-b from-white to-sky-100">
-                <Text className="text-base text-slate-700 font-medium">
+                <Text className="text-base text-slate-700 ">
                   Áp suất
                 </Text>
                 <Box className="flex items-center justify-center">
                   <FaCompress className="text-zinc-500 mr-2" />
-                  <Text className="text-lg text-zinc-800 font-semibold">
+                  <Text className="text-lg text-zinc-800 font-medium">
                     {weather.pressure} hPa
                   </Text>
                 </Box>
               </Box>
               
               <Box className="flex-col items-center justify-items-center bg-gradient-to-b from-white to-sky-100 rounded-lg shadow-lg py-1">
-                <Text className="text-base text-slate-700 font-medium">
+                <Text className="text-base text-slate-700 ">
                   Tốc độ gió
                 </Text>
                 <Box className="flex items-center justify-center">
                   <FaWind className="text-cyan-500 mr-2" />
-                  <Text className="text-lg text-zinc-800 font-semibold">
+                  <Text className="text-lg text-zinc-800 font-medium">
                     {weather.windSpeed} m/s
                   </Text>
                 </Box>
               </Box>
 
               <Box className="flex-col items-center justify-items-center bg-gradient-to-b from-white to-sky-100 rounded-lg shadow-lg py-1">
-                <Text className="text-base text-slate-700 font-medium">
+                <Text className="text-base text-slate-700 ">
                   Mặt trời mọc
                 </Text>
                 <Box className="flex items-center justify-center">
                   <FaSun className="text-yellow-500 mr-2" />
-                  <Text className="text-lg text-zinc-800 font-semibold">
+                  <Text className="text-lg text-zinc-800 font-medium">
                     {formatTime(weather.sunrise)}
                   </Text>
                 </Box>
               </Box>
 
               <Box className="flex-col items-center justify-items-center bg-gradient-to-b from-white to-sky-100 rounded-lg shadow-lg py-1">
-                <Text className="text-base text-slate-700 font-medium">
+                <Text className="text-base text-slate-700 ">
                   Mặt trời lặn
                 </Text>
                 <Box className="flex items-center justify-center">
                   <FaMoon className="text-indigo-500 mr-2" />
-                  <Text className="text-lg text-zinc-800 font-semibold">
+                  <Text className="text-lg text-zinc-800 font-medium">
                     {formatTime(weather.sunset)}
                   </Text>
                 </Box>
@@ -205,14 +201,14 @@ const WeatherPage = () => {
             </Box>
             
             {forecast && (
-              <Box className="mt-6 pl-3">
-                <Text className="text-xl mb-2 font-semibold text-neutral-700 flex items-center">
+              <Box className="mt-6">
+                <Text className="pl-3 text-xl mb-2 text-neutral-700 flex items-center">
                   <FaClock className="mr-2 text-blue-600" />
                   Dự báo 24 giờ tới
                 </Text>
-                <Box className="flex overflow-x-auto py-2 scrollable-content">
+                <Box className="flex overflow-x-auto py-2 px-2 scrollable-content">
                   {getHourlyForecasts().map((hourForecast, index) => (
-                    <Box key={index} className="flex-shrink-0 w-20 bg-white rounded-lg shadow-md p-2 mr-2 flex flex-col items-center">
+                    <Box key={index} className="flex-shrink-0 w-20 bg-white rounded-lg shadow-md p-2 ml-1 mr-1 flex flex-col items-center">
                       <Text className="text-xs font-medium text-gray-700">
                         {formatHour(hourForecast.dt)}
                       </Text>
@@ -231,7 +227,7 @@ const WeatherPage = () => {
             {/* 6-day forecast section */}
             {forecast && forecast.dailyForecasts && (
               <Box className="mt-6 px-3">
-                <Text className="text-xl mb-2 font-semibold text-neutral-700 flex items-center">
+                <Text className="text-xl mb-2 text-neutral-700 flex items-center">
                   <FaCalendarAlt className="mr-2 text-green-600" />
                   Dự báo 6 ngày tới
                 </Text>

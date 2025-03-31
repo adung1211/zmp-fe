@@ -66,7 +66,7 @@ const NewsDetail: FC = () => {
     return (
     <Page className="relative flex-1 flex flex-col bg-white">
     <Header
-        className="app-header no-border flex-none pl-4 text-white bg-green"
+        className="app-header no-border flex-none pl-4 text-white bg-green-700"
         title="Chi tiết tin tức"
       />
     </Page>
@@ -78,7 +78,7 @@ const NewsDetail: FC = () => {
   return (
     <Page className="relative flex-1 flex flex-col bg-white">
       <Header
-        className="app-header no-border flex-none pl-4 text-white bg-green"
+        className="app-header no-border flex-none pl-4 text-white bg-green-700"
         title="Chi tiết tin tức"
       />
       <Box className="overflow-y-auto scrollable-content">

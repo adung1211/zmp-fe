@@ -1,7 +1,9 @@
 import React, { FC } from "react";
 import { Box, Page, Header, Text, Icon } from "zmp-ui";
 import { useNavigate } from "react-router-dom";
-import { FaCloudSun, FaTint, FaChartLine } from "react-icons/fa";
+import { FaCloudSun, FaTint, FaChartLine, FaCommentDots
+
+ } from "react-icons/fa";
 
 const ServicePage: FC = () => {
   const navigate = useNavigate();
@@ -22,11 +24,16 @@ const ServicePage: FC = () => {
       icon: <FaChartLine className="text-orange-500 text-2xl" />,
       route: "/service/market",
     },
+    {
+      name: "Chat Bot",
+      icon: <FaCommentDots className="text-indigo-500 text-2xl" />,
+      route: "/service/chatbot",
+    },
   ];
 
   return (
     <Page>
-      <Header className="bg-green text-white" title="Dịch vụ" />
+      <Header className="bg-green-700 text-white" title="Dịch vụ" />
       <Box className="py-4">
         {services.map((service) => (
           <Box

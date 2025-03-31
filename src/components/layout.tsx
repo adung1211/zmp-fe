@@ -11,6 +11,7 @@ import NewsDetail from "../pages/newsDetail";
 import NewsPage from "../pages/info/NewsPage";
 import ServicePage from "../pages/service/ServicePage";
 import WeatherPage from "../pages/service/weatherPage";
+import ChatBot from "../pages/service/ChatBot";
 
 import { useAuth } from "hooks";
 
@@ -45,6 +46,7 @@ export const Layout: FC = () => {
           <Route path="/info" element={<NewsPage />} />
           <Route path='/service' element={<ServicePage />} />
           <Route path='/service/weather' element={<WeatherPage />} />
+          <Route path='/service/chatbot' element={<ChatBot />} />
         </Routes>
       </Box>
       <Navigation />

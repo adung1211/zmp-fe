@@ -16,7 +16,7 @@ const SearchInput: FC<SearchInputProps> = ({ onSearch }) => {
     };
 
     return (
-        <Box className="bg-green px-4 pb-2 pt-1 mt-[-1px]">
+        <Box className="bg-green-700 px-4 pb-2 pt-1 mt-[-1px]">
         <Box className="flex items-center bg-white rounded-full px-3 text-sm">
           <FaSearch className="text-gray-500 mr-2" />
           <Input

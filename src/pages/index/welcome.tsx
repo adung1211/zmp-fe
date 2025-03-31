@@ -7,7 +7,7 @@ export const  Welcome: FC = () => {
   const {user} = useAuth();
   return (
     <Header
-      className="app-header no-border flex-none pl-4 text-white bg-green" 
+      className="app-header no-border flex-none pl-4 text-white bg-green-700" 
       showBackIcon={false}
       title={
         (
