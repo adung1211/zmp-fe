@@ -10,6 +10,7 @@ import {
   FaCommentDots,
   FaRegUser,
 } from "react-icons/fa";
+import { openChat } from "zmp-sdk/apis";
 
 const tabs: Record<string, MenuItem> = {
   "/": {
@@ -47,6 +48,21 @@ export const Navigation: FC = () => {
     return NO_BOTTOM_NAVIGATION_PAGES.includes(location.pathname);
   }, [location]);
 
+  const handleNavigation = async (path: string) => {
+    if (path === "/chat") {
+      try {
+        await openChat({
+          type: "oa",
+          id: "1473982290596396554",
+          message: "Xin Chào",
+        });
+      } catch (error) {
+        console.log("Failed to open chat:", error);
+      }
+    } else {
+      navigate(path);
+    }
+  };
   if (noBottomNav || keyboardVisible) {
     return <></>;
   }
@@ -55,7 +71,7 @@ export const Navigation: FC = () => {
     <BottomNavigation
       id="footer"
       activeKey={location.pathname}
-      onChange={navigate}
+      onChange={handleNavigation}
       className="z-50 custom-bottom-nav"
     >
       {Object.keys(tabs).map((path: TabKeys) => (
