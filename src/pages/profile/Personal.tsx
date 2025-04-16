@@ -10,6 +10,8 @@ const Personal: FC = () => {
 
   const onClick = useToBeImplemented();
   const savedUser = getSession();
+
+  const [trigger, setTrigger] = useState(0);
   
   const follow = async () => {
     try {
@@ -17,7 +19,8 @@ const Personal: FC = () => {
         id: "1473982290596396554",
       });
       const updatedUser = { ...savedUser, followedOA: true };
-      saveSession(updatedUser );
+      saveSession(updatedUser);
+      setTrigger(trigger + 1);
     } catch (error) {
       console.log(error);
     }
