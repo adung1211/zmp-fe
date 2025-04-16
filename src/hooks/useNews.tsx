@@ -4,6 +4,8 @@ import { NewsItem } from "../types/news";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+const newsCache: Record<string, NewsItem[]> = {};
+
 interface UseNewsProps {
   limit: number;
   category?: string;
@@ -22,6 +24,12 @@ const useNews = ({ limit, category, sortBy, searchTerm }: UseNewsProps) => {
     const fetchNews = async () => {
       setLoading(true);
       setError(null);
+      const cacheKey = `${category || 'all'}-${sortBy || 'default'}`;
+
+      if (page === 1 && newsCache[cacheKey]) {
+        setNews(newsCache[cacheKey]);
+        setHasMore(newsCache[cacheKey].length >= limit);
+      }
       try {
         console.log( "page:", page, "limit:", limit, "category:", category, "sortBy:", sortBy);
         const response = await axios.get(`${API_URL}/posts`, {
@@ -30,19 +38,20 @@ const useNews = ({ limit, category, sortBy, searchTerm }: UseNewsProps) => {
             limit,
             category,
             sortBy,
-            query: searchTerm, // Include the search term in the API request
+            query: searchTerm,
           },
           headers: { "ngrok-skip-browser-warning": "69420" },
         });
         const newNews = response.data;
         if (newNews.length === 0) {
           setHasMore(false);
-        } else if (page === 1) { // Initial load
-          setNews(newNews);
-          console.log("Fresh News:", news);
         } else {
-          setNews((prevNews) => [...prevNews, ...newNews]);
-          console.log("News:", news);
+          if (page === 1) {
+            newsCache[cacheKey] = newNews;
+            setNews(newNews);
+          } else {
+            setNews((prevNews) => [...prevNews, ...newNews]);
+          }
         }
       } catch (err: any) {
         setError(err.message || 'Failed to fetch news');

@@ -17,9 +17,9 @@ const CategoryPicker: FC = () => {
       className="category-tabs"
     >
       {categories.map((category) => (
-        <Tabs.Tab key={category.id} label={category.name}>
+        <Tabs.Tab key={category._id} label={category.name}>
           <Suspense>
-            <CategoryProducts categoryId={category.id} />
+            <CategoryProducts categoryId={category._id} />
           </Suspense>
         </Tabs.Tab>
       ))}

@@ -3,6 +3,7 @@ import { Category } from "../types/category";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
+let categoriesCache: Category[] | null = null;
 
 const useCategories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -13,10 +14,16 @@ const useCategories = () => {
     const fetchCategories = async () => {
       setLoading(true);
       setError(null);
+      if (categoriesCache) {
+        setCategories(categoriesCache);
+        setLoading(false);
+        return;
+      }
       try {
         const response = await axios.get(`${API_URL}/categories`, {
           headers: { "ngrok-skip-browser-warning": "69420" },
         });
+        categoriesCache = response.data;
         setCategories(response.data);
       } catch (err: any) {
         setError(err.message || "Failed to fetch categories");
