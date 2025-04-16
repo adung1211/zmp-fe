@@ -1,45 +1,27 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useState } from "react";
 import { Box, Button, Icon, Text } from "zmp-ui";
-import { useToBeImplemented, useAuth } from "hooks";
+import { useToBeImplemented } from "hooks";
 import logoOA from "static/logoOA.png";
+import { followOA} from "zmp-sdk/apis";
 
-import { followOA, getUserInfo} from "zmp-sdk/apis";
+import { saveSession, getSession, clearSession } from "utils/storage";
 
 const Personal: FC = () => {
-  const [following, setFollowing] = React.useState(false);
-  const { user } = useAuth();
+
   const onClick = useToBeImplemented();
-
-  const isFollowedOA = async () => {
-     try {
-        const data = await getUserInfo({});
-        console.log("isFollowedOA data:", data);
-        return data?.userInfo?.followedOA == true;
-      } catch (error) {
-        console.log("isFollowedOA Error:", error);
-      }
-    
-      return false;
-  };
-
+  const savedUser = getSession();
+  
   const follow = async () => {
     try {
       await followOA({
         id: "1473982290596396554",
       });
+      const updatedUser = { ...savedUser, followedOA: true };
+      saveSession(updatedUser );
     } catch (error) {
-      // xử lý khi gọi api thất bại
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    const checkFollowedOA = async () => {
-      const followed = await isFollowedOA();
-      setFollowing(followed);
-    };
-    checkFollowedOA();
-  }, []);
 
   return (
     <Box>
@@ -96,16 +78,14 @@ const Personal: FC = () => {
               An Tâm Tưới Mini App
             </Text>
           </Box>
-          {(!user || !following) &&(
-          <Button variant="primary" size="small" onClick={follow}>
-            Quan tâm
+          <Button
+            variant="primary"
+            size="small"
+            onClick={!savedUser.followedOA ? follow : undefined}
+            disabled={savedUser.followedOA}
+          >
+            {savedUser.followedOA ? "Đã quan tâm" : "Quan tâm"}
           </Button>
-          )}
-          {user && following &&(
-            <Button variant="primary" size="small" disabled={true}>
-                Đã quan tâm
-            </Button>
-          )}
           
         </Box>
     </Box>

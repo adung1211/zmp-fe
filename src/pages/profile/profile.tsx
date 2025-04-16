@@ -14,7 +14,7 @@ const ProfilePage: FC = () => {
     <Page className="relative flex-1 flex flex-col bg-white">
       <Welcome />
       {!user && <Subscription />}
-      <Personal />
+      {user && <Personal />}
       <QRCode />
     </Page>
   );
