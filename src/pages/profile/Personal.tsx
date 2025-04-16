@@ -1,10 +1,45 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Box, Button, Icon, Text } from "zmp-ui";
-import { useToBeImplemented } from "hooks";
+import { useToBeImplemented, useAuth } from "hooks";
 import logoOA from "static/logoOA.png";
 
+import { followOA, getUserInfo} from "zmp-sdk/apis";
+
 const Personal: FC = () => {
+  const [following, setFollowing] = React.useState(false);
+  const { user } = useAuth();
   const onClick = useToBeImplemented();
+
+  const isFollowedOA = async () => {
+     try {
+        const data = await getUserInfo({});
+        console.log("isFollowedOA data:", data);
+        return data?.userInfo?.followedOA == true;
+      } catch (error) {
+        console.log("isFollowedOA Error:", error);
+      }
+    
+      return false;
+  };
+
+  const follow = async () => {
+    try {
+      await followOA({
+        id: "1473982290596396554",
+      });
+    } catch (error) {
+      // xử lý khi gọi api thất bại
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const checkFollowedOA = async () => {
+      const followed = await isFollowedOA();
+      setFollowing(followed);
+    };
+    checkFollowedOA();
+  }, []);
 
   return (
     <Box>
@@ -40,8 +75,7 @@ const Personal: FC = () => {
         <Box className="h-[1px] bg-zinc-200 mx-4" />
         
         <Box 
-          className="flex items-center p-4 space-x-4 cursor-pointer" 
-          onClick={onClick}
+          className="flex items-center p-4 space-x-4" 
         >
           <Icon icon="zi-star" />
           <Box flex className="flex-1">
@@ -51,7 +85,7 @@ const Personal: FC = () => {
           </Box>
         </Box>
         
-        <Box className="h-[1px] bg-zinc-200 mx-4" />
+        {/* <Box className="h-[1px] bg-zinc-200 mx-4" /> */}
 
         <Box 
           className="flex items-center p-4 space-x-4"
@@ -62,9 +96,17 @@ const Personal: FC = () => {
               An Tâm Tưới Mini App
             </Text>
           </Box>
-          <Button variant="primary" size="small">
+          {(!user || !following) &&(
+          <Button variant="primary" size="small" onClick={follow}>
             Quan tâm
           </Button>
+          )}
+          {user && following &&(
+            <Button variant="primary" size="small" disabled={true}>
+                Đã quan tâm
+            </Button>
+          )}
+          
         </Box>
     </Box>
     

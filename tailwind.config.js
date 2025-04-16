@@ -13,4 +13,7 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    require('@tailwindcss/typography'), // Add this line
+  ],
 };

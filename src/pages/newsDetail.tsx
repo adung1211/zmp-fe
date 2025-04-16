@@ -164,7 +164,7 @@ const NewsDetail: FC = () => {
         </Box>
         <Divider />
         <Box
-          className="mt-4 html-content px-2"
+          className="mt-4 html-content px-2 prose"
           dangerouslySetInnerHTML={{ __html: newsItem.content }}
         />
         <Box className="mb-2 px-3 text-right font-bold">
