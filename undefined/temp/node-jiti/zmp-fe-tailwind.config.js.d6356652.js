@@ -1,4 +1,4 @@
-module.exports = {
+"use strict";module.exports = {
   purge: {
     enabled: true,
     content: ["./src/**/*.{js,jsx,ts,tsx,vue}"],
@@ -14,6 +14,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
+    require('@tailwindcss/typography'), // Add this line
   ],
 };
+ /* v7-8fb5d031e6e12a5d */
