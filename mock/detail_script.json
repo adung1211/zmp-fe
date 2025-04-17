@@ -1,0 +1,23 @@
+{
+    "_id": "67f88ac799a2a6150ca64bae",
+    "name": "Kich bản tưới cây dưa hấu",
+    "description": "Đây là một kịch bản tưới cây đỉnh nóc kịch trần",
+    "privacy": "public",
+    "owner_id": "67c273401fb713deae4b068c",
+    "version": [
+        1,
+        2
+    ],
+    "model_id": null,
+    "favorite": 1,
+    "location": [
+        "da-nang",
+        "hue"
+    ],
+    "plant_type": [
+        "cam"
+    ],
+    "createdAt": "2025-04-11T03:21:43.320Z",
+    "updatedAt": "2025-04-11T03:21:43.320Z",
+    "__v": 0
+}
