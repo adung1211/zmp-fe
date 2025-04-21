@@ -1,6 +1,7 @@
 import React, { FC, useState, useRef, useEffect } from "react";
 import { Box, Page, Header, Input, Button, Text } from "zmp-ui";
 import { FaPaperPlane } from "react-icons/fa";
+import { askChatbot } from "../../hooks/useChatbot";
 
 interface Message {
   id: number;
@@ -19,7 +20,8 @@ const ChatBot: FC = () => {
     },
   ]);
   const [inputMessage, setInputMessage] = useState("");
-  const messagesContainerRef = useRef<HTMLDivElement>(document.createElement('div'));
+  const [loading, setLoading] = useState(false);
+  const messagesContainerRef = useRef<HTMLDivElement>(document.createElement("div"));
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -30,12 +32,11 @@ const ChatBot: FC = () => {
     });
   };
 
-
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputMessage.trim() === "") return;
 
     const userMessage: Message = {
@@ -48,31 +49,55 @@ const ChatBot: FC = () => {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInputMessage("");
 
-    setTimeout(() => {
+    try {
+      setLoading(true);
+
+      const reply = await askChatbot([
+        ...messages.map((msg) => ({
+          role: msg.isUser ? "user" : "model",
+          text: msg.text,
+        } as { role: "user" | "model"; text: string })),
+        { role: "user", text: inputMessage },
+      ]);
+
       const botResponse: Message = {
         id: messages.length + 2,
-        text: "This is a reply",
+        text: reply,
         isUser: false,
         timestamp: new Date(),
       };
+
       setMessages((prevMessages) => [...prevMessages, botResponse]);
-    }, 500);
+    } catch (error) {
+      console.error("Error sending message to chatbot:", error);
+      const errorMessage: Message = {
+        id: messages.length + 2,
+        text: "Xin lỗi, tôi không thể trả lời câu hỏi của bạn ngay bây giờ.",
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
 
   return (
     <Page className="flex flex-col h-screen">
-      <Header title="Trợ lý An Tâm Tưới" showBackIcon 
-      className="bg-green-700 text-white"
+      <Header
+        title="Trợ lý An Tâm Tưới"
+        showBackIcon
+        className="bg-green-700 text-white"
       />
-      <Box className="flex flex-col h-full overflow-y-auto"
+      <Box
+        className="flex flex-col h-full overflow-y-auto"
         ref={messagesContainerRef}
       >
-        <Box className="flex-1 p-4 bg-slate-50"
-        >
+        <Box className="flex-1 p-4 bg-slate-50">
           {messages.map((message) => (
             <Box
               key={message.id}
@@ -82,7 +107,14 @@ const ChatBot: FC = () => {
                   : "mr-auto bg-sky-100 rounded-tl-2xl rounded-tr-2xl rounded-br-2xl shadow-sm"
               } p-3`}
             >
-              <Text>{message.text}</Text>
+              <Text
+              dangerouslySetInnerHTML={{
+                __html: message.text
+                .replace(/\n/g, "<br />")
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                ,
+              }}
+            />
               <Text size="xSmall" className="text-right mt-1 text-gray-500">
                 {formatTime(message.timestamp)}
               </Text>
@@ -104,12 +136,12 @@ const ChatBot: FC = () => {
               }}
             />
             <Button
-            className="ml-2 w-12 h-12 min-w-0 min-h-0 flex items-center justify-center rounded-full"
-            onClick={handleSendMessage}
-            disabled={inputMessage.trim() === ""}
-            variant="primary"
+              className="ml-2 w-12 h-12 min-w-0 min-h-0 flex items-center justify-center rounded-full"
+              onClick={handleSendMessage}
+              disabled={inputMessage.trim() === "" || loading}
+              variant="primary"
             >
-            <FaPaperPlane />
+              <FaPaperPlane />
             </Button>
           </Box>
         </Box>
