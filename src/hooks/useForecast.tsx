@@ -27,16 +27,6 @@ const useForecast = (coordinates: Coordinates) => {
         
         const hourlyData = await hourlyResponse.json();
         
-        const dailyResponse = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${coordinates.lat}&lon=${coordinates.lon}&cnt=8&units=metric&lang=vi&appid=${API_KEY}`
-        );
-        
-        if (!dailyResponse.ok) {
-          throw new Error(`Daily forecast API error: ${dailyResponse.statusText}`);
-        }
-        
-        const dailyData = await dailyResponse.json();
-        
         const hourlyForecasts = hourlyData.list.map((item: any) => ({
           dt: item.dt,
           temperature: Math.round(item.main.temp),
@@ -47,24 +37,10 @@ const useForecast = (coordinates: Coordinates) => {
           date: new Date(item.dt * 1000),
           isDaily: false
         }));
-        
-        const dailyForecasts = dailyData.list.map((item: any) => ({
-          dt: item.dt,
-          temperature: Math.round(item.temp.day),
-          min_temp: Math.round(item.temp.min),
-          max_temp: Math.round(item.temp.max),
-          description: item.weather[0].description,
-          icon: item.weather[0].icon,
-          humidity: item.humidity,
-          windSpeed: item.speed,
-          date: new Date(item.dt * 1000),
-          isDaily: true
-        }));
-        
+
         setForecast({
-          city: dailyData.city.name,
-          forecasts: hourlyForecasts,
-          dailyForecasts: dailyForecasts
+          city: hourlyData.city.name,
+          forecasts: hourlyForecasts
         });
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');

@@ -53,7 +53,6 @@ const WeatherPage = () => {
     return days[date.getDay()];
   };
 
-  // Group provinces by region
   const regionGroups = vnProvinces.reduce((groups, province) => {
     const region = province.region || "Khác";
     if (!groups[region]) {
@@ -63,24 +62,41 @@ const WeatherPage = () => {
     return groups;
   }, {} as Record<string, Province[]>);
 
-  // Get hourly forecasts for next 24 hours
   const getHourlyForecasts = () => {
     if (!forecast) return [];
     
     const now = new Date();
-    // Get forecasts for the next 24 hours (8 forecasts with 3-hour intervals)
     return forecast.forecasts
       .filter(f => {
         const forecastTime = new Date(f.dt * 1000);
         return forecastTime > now && forecastTime < new Date(now.getTime() + 24 * 60 * 60 * 1000);
       })
-      .slice(0, 8); // Take first 8 forecasts (covers 24 hours with 3-hour intervals)
+      .slice(0, 8);
   };
 
-  // Group forecasts by day
   const getDayForecasts = () => {
-    if (!forecast || !forecast.dailyForecasts) return [];
-    return forecast.dailyForecasts.slice(1, 7); // Return all 7 days
+    if (!forecast || !forecast.forecasts) return [];
+  
+    const dailyForecasts = forecast.forecasts.reduce((acc, curr) => {
+      const date = new Date(curr.dt * 1000).toISOString().split('T')[0];
+      if (!acc[date]) {
+        acc[date] = {
+          dt: curr.dt,
+          temperature: curr.temperature,
+          min_temp: curr.temperature,
+          max_temp: curr.temperature,
+          description: curr.description,
+          icon: curr.icon,
+        };
+      } else {
+        acc[date].min_temp = Math.min(acc[date].min_temp, curr.temperature);
+        acc[date].max_temp = Math.max(acc[date].max_temp, curr.temperature);
+      }
+  
+      return acc;
+    }, {} as Record<string, any>);
+  
+    return Object.values(dailyForecasts).slice(1, 6);
   };
 
   return (
@@ -224,12 +240,12 @@ const WeatherPage = () => {
               </Box>
             )}
             
-            {/* 6-day forecast section */}
-            {forecast && forecast.dailyForecasts && (
+            {/* 5-day forecast section */}
+            {forecast && (
               <Box className="mt-6 px-3">
                 <Text className="text-xl mb-2 text-neutral-700 flex items-center">
                   <FaCalendarAlt className="mr-2 text-green-600" />
-                  Dự báo 6 ngày tới
+                  Dự báo 5 ngày tới
                 </Text>
                 <Box className="flex flex-col gap-2">
                   {getDayForecasts().map((dayForecast, index) => (

@@ -41,7 +41,6 @@ export interface ForecastItem {
 export interface ForecastData {
   city: string;
   forecasts: ForecastItem[];
-  dailyForecasts?: ForecastItem[];
 }
 export interface WeatherState {
   data: WeatherData | null;
