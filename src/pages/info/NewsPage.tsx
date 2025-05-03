@@ -35,14 +35,30 @@ const NewsPage: FC = () => {
       <Box className="overflow-x-hidden mt-[-1px] scrollable-content">
         {tab === "all" && (
           <AllNews
-            key="all"
+            key={"all" + "-" + searchTerm}
             sortBy={sortBy}
             searchTerm={searchTerm}
           />
         )}
-        {tab !== "all" && (
+        {tab === "liked" && (
           <AllNews
-            key={tab + searchTerm}
+            key={"liked" + "-" + searchTerm}
+            category="liked"
+            sortBy={sortBy}
+            searchTerm={searchTerm}
+          />
+        )}
+        {tab === "recommendations" && (
+          <AllNews
+            key={"recommendations" + "-" + searchTerm}
+            category="recommendations"
+            sortBy={sortBy}
+            searchTerm={searchTerm}
+          />
+        )}
+        {tab !== "all" && tab !== "liked" && tab !== "recommendations" && (
+          <AllNews
+            key={tab + "-" + searchTerm}
             category={tab}
             sortBy={sortBy}
             searchTerm={searchTerm}

@@ -1,4 +1,3 @@
-// src/hooks/useForecast.tsx
 import { useState, useEffect } from "react";
 import { Coordinates, ForecastData } from "../types/weather";
 

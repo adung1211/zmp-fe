@@ -7,6 +7,7 @@ export function useNewsTab() {
   const tab = (params.get('tab') || 'all') as string;
 
   function setTab(tab: string) {
+    console.log('setTab', tab);
     setParams({ tab });
   }
 
