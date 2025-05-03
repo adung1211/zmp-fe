@@ -10,7 +10,7 @@ import { parseISOString } from "utils/date";
 interface AllNewsSectionProps {
   title: string;
   sortBy?: string;
-  category?: string; // Add category prop
+  category?: string;
 }
 
 export const AllNewsSectionContent: FC<AllNewsSectionProps> = ({ title, sortBy, category }) => {
@@ -25,10 +25,10 @@ export const AllNewsSectionContent: FC<AllNewsSectionProps> = ({ title, sortBy, 
     if (category) {
       navigate(`/info?tab=${category}`);
     } else if (sortBy === 'view') {
-      navigate(`/info?tab=featured`);
+      navigate(`/info?tab=all&sortBy=view`);
     }
     else {
-      navigate(`/info?tab=latest`);
+      navigate(`/info?tab=all`);
     }
   };
 

@@ -1,29 +1,53 @@
 import React, { FC, useState, useRef, useEffect } from "react";
-import { Box, Page, Header } from "zmp-ui";
+import { useSearchParams } from "react-router-dom";
+import { Box, Page, Header, Select } from "zmp-ui";
 import NewsTabs from "components/NewsTabs";
 import { useNewsTab } from "hooks/useNewsTab";
 import AllNews from "./AllNews";
 import SearchInput from "./SearchInput";
 
 const NewsPage: FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [tab] = useNewsTab();
   const [searchTerm, setSearchTerm] = useState("");
+  const sortByParam = searchParams.get("sortBy") || "latest";
+  const [sortBy, setSortBy] = useState(sortByParam);
+
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
   };
+  const handleSortChange = (value: string) => {
+    setSortBy(value);
+  };
 
   return (
-    <Page className="bg-gray elative flex-1 flex flex-col bg-white ">
-      <Header title="Tin Tức"
-       className="bg-green-700 text-white"
-       />
-      <SearchInput onSearch={handleSearch} />
+    <Page className="bg-gray relative flex-1 flex flex-col bg-white">
+      <Header
+        title="Tin Tức"
+        className="bg-green-700 text-white"
+      />
+      <SearchInput
+        onSearch={handleSearch}
+        onSortChange={handleSortChange}
+      />
       <NewsTabs />
       <Box className="overflow-x-hidden mt-[-1px] scrollable-content">
-        {tab === 'latest' && <AllNews key={searchTerm} searchTerm={searchTerm} />}
-        {tab === 'featured' && <AllNews key={searchTerm} sortBy="view" searchTerm={searchTerm}/>}
-        {tab !== 'latest' && tab !== 'featured' && <AllNews key={searchTerm + tab} category={tab} searchTerm={searchTerm} />}
+        {tab === "all" && (
+          <AllNews
+            key="all"
+            sortBy={sortBy}
+            searchTerm={searchTerm}
+          />
+        )}
+        {tab !== "all" && (
+          <AllNews
+            key={tab + searchTerm}
+            category={tab}
+            sortBy={sortBy}
+            searchTerm={searchTerm}
+          />
+        )}
       </Box>
     </Page>
   );

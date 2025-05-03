@@ -1,4 +1,4 @@
-// src/types/weather.ts
+
 export interface Coordinates {
   lat: number;
   lon: number;

@@ -43,15 +43,6 @@ export const userState = selector({
   },
 });
 
-export const categoriesState = selector<Category[]>({
-  key: "categories",
-  get: () => categories.map(category => ({
-    ...category,
-    description: '',
-    slug: category.id,
-    thumbnail: ''
-  })) as Category[],
-});
 
 export const productsState = selector<Product[]>({
   key: "products",
@@ -321,7 +312,6 @@ export const phoneState = selector<string | boolean>({
         console.warn("Giả lập số điện thoại mặc định: 0337076898");
         return "0337076898";
       } catch (error) {
-        // Xử lý exception
         console.error(error);
         return false;
       }

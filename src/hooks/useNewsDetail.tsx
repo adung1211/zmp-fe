@@ -39,19 +39,17 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
         setNewsItem(newsResponse.data);
         setLikeCount(newsResponse.data.like);
 
-        // Use the provided API endpoint to check if the post is liked
         const likeResponse = await axios.get(
           `${API_URL}/posts/${newsItemId}/isLiked`,
           {
             headers: {
               "ngrok-skip-browser-warning": "69420",
-              userId: userId, // Pass userId in the headers
+              userId: userId, 
             },
           }
         );
         setIsLiked(likeResponse.data.isLiked);
 
-        // Fetch comments for the post
         const commentsResponse = await axios.get(
           `${API_URL}/posts/${newsItemId}/getcomments`,
           {
@@ -104,7 +102,6 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
         }
       );
 
-      // Add the new comment to the state
       setComments([response.data, ...comments]);
     } catch (error: any) {
       setError(error.message || "Failed to add comment");
@@ -125,7 +122,6 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
         }
       );
 
-      // Update the comments state with the edited comment
       setComments(
         comments.map((comment) =>
           comment._id === commentId ? response.data : comment
@@ -149,7 +145,6 @@ const useNewsDetail = ({ newsItemId }: UseNewsDetailProps) => {
         }
       );
 
-      // Remove the deleted comment from state
       setComments(comments.filter((comment) => comment._id !== commentId));
     } catch (error: any) {
       setError(error.message || "Failed to delete comment");

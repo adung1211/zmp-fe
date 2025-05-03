@@ -23,12 +23,8 @@ const NewsTabs: FC = () => {
     <Box className="bg-white shadow-md">
       <Tabs activeKey={tab} onChange={handleTabChange} className="px-4" scrollable>
         <Tabs.Tab
-          key="latest"
-          label={<Text className=" font-semibold">Mới nhất</Text>}
-        />
-        <Tabs.Tab
-          key="featured"
-          label={<Text className=" font-semibold">Nổi bật</Text>}
+          key="all"
+          label={<Text className=" font-semibold">Tất cả</Text>}
         />
         {categoryTabs.map((category) => (
           <Tabs.Tab

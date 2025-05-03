@@ -50,7 +50,6 @@ const NewsDetail: FC = () => {
     if (newComment.trim() !== "") {
       handleCommentSubmit(newComment);
       setNewComment("");
-      // Scroll to the top of the comment section
       if (commentsContainerRef.current) {
         commentsContainerRef.current.scrollTo({
           top: 0,

@@ -48,7 +48,6 @@ export const useAuth = (): {
         console.log(error);
       }
     } catch (error) {
-      // xử lý khi gọi api thất bại
       console.log("authorize error:", error);
     }
   };
