@@ -15,11 +15,11 @@ export const isUserExist = async (id) => {
   }
 };
 
-export const createUser = async (id, name, avatar) => {
+export const createUser = async (zid, name, avatar) => {
   try {
     await axios.post(
       `${API_URL}/user/create`,
-      { id, name, avatar },
+      { zid, name, avatar },
       {
         headers: { "ngrok-skip-browser-warning": "69420" },
       }
