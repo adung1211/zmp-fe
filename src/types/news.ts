@@ -7,6 +7,7 @@ export interface NewsItem {
   title: string;
   content: string;
   thumbnail_url: string;
+  author: string;
   tags: {
     name: string;
     slug: string;

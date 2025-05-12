@@ -167,7 +167,7 @@ const NewsDetail: FC = () => {
           dangerouslySetInnerHTML={{ __html: newsItem.content }}
         />
         <Box className="mb-2 px-3 text-right font-bold">
-          {newsItem.created_by}
+          {newsItem.author}
         </Box>
 
         <Box className="">
