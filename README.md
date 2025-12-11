@@ -1,4 +1,4 @@
-# Agriculture News MiniApp
+# News Zalo Mini App
 
 > A specialized news application designed to deliver agricultural updates to farmers, supported by a robust CMS for content administration. Fully deployed within the Zalo Mini App ecosystem ([Read more](https://miniapp.zaloplatforms.com/documents/intro/what-is-miniapp/)).
 
