@@ -23,19 +23,19 @@ https://github.com/user-attachments/assets/c2c6d24e-5408-4217-b78b-05f26be17a00
 * **Media Management:** A web-based CMS dashboard featuring granular Role-Based Access Control (RBAC) for administrators and editors.
 
 <div align="center">
-    <img src="https://i.ibb.co/9m3MgJm0/image.png" border="1" width="600">  <br/>
+    <img src="https://i.ibb.co/mC1KMf43/image.png" border="1" width="600">  <br/>
   <b>Upload Flow:</b> <i>Create and publish news content to the app</i>
 </div>
 <br/>
 <br/>
 <div align="center">
-    <img src="https://i.ibb.co/SwHD2wZg/image.png" border="1" width="600">  <br/>
+    <img src="https://i.ibb.co/tTf2Pdnm/image-1.png" border="1" width="600">  <br/>
   <b>Post Management:</b> <i>Manage and oversee created posts</i>
 </div>
 <br/>
 <br/>
 <div align="center">
-    <img src="https://i.ibb.co/Y4zDCmXh/image-1.png" border="1" width="600">  <br/>
+    <img src="https://i.ibb.co/zW298CJk/image-2.png" border="1" width="600">  <br/>
   <b>Text Editor:</b> <i>Rich text editor with fully integrated formatting features</i>
 </div>
 <br/>
